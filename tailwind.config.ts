@@ -83,11 +83,3 @@ const config: Config = {
   plugins: [],
 };
 export default config;
-
-// "": [
-//   "rem",
-//   {
-//     fontWeight: "",
-//     lineHeight: "rem",
-//   },
-// ],
