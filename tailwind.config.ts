@@ -12,8 +12,10 @@ const config: Config = {
       colors: {
         primary: "#f26e22",
         grey: {
-          100: "#c4c4c4",
-          200: "#767676",
+          100: "#f2f2f2",
+          300: "#dbdbdb",
+          500: "#c4c4c4",
+          700: "#767676",
         },
         black: "#000000",
         white: "#ffffff",
