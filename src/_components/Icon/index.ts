@@ -1,3 +1,3 @@
-export * from "./BackIcon/BackIcon";
-export * from "./MoreIcon/MoreIcon";
-export * from "./SearchIcon/SearchIcon";
+export * from "./BackIcon";
+export * from "./MoreIcon";
+export * from "./SearchIcon";
