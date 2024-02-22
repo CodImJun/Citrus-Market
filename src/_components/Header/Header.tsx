@@ -1,9 +1,11 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
+
 import { BackIcon, MoreIcon, SearchIcon } from "../Icon";
-import { SearchBar } from "../SearchBar/SearchBar";
+import { SearchBar } from "../SearchBar";
 import { Button } from "../Button";
+
 import { ChatHeaderProps, UploadHeaderProps } from "./Header.types";
 
 export const Header = () => {

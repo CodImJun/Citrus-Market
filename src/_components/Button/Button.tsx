@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import { ButtonProps } from "./Button.types";
 
 export const Button = ({ children, size, w, ...props }: ButtonProps) => {
