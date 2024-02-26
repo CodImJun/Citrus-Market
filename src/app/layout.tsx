@@ -20,5 +20,9 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
 }
 
 const Layout = ({ children }: React.PropsWithChildren) => {
-  return <div className="max-w-[39rem] h-full m-auto">{children}</div>;
+  return (
+    <div className="max-w-[39rem] h-full m-auto border-x-[0.1rem] border-solid border-grey-300">
+      {children}
+    </div>
+  );
 };
