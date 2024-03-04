@@ -22,6 +22,7 @@ const config: Config = {
         },
         black: "#000000",
         white: "#ffffff",
+        red: "#EB5757",
       },
     },
   },

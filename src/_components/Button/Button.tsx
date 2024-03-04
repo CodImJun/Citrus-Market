@@ -29,7 +29,9 @@ export const Button = ({ children, size, w, ...props }: ButtonProps) => {
 
   return (
     <button
-      className={`${WIDTH_HEIGHT_RADIUS[size]} ${BG_COLOR()} ${FONT()}`}
+      className={`${WIDTH_HEIGHT_RADIUS[size]} ${BG_COLOR()} ${FONT()} ${
+        props.className
+      }`}
       disabled={props.disabled}
     >
       {children}
