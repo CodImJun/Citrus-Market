@@ -23,7 +23,7 @@ const LoginPage = () => {
   };
 
   return (
-    <main className="flex flex-col w-full items-center">
+    <>
       <form
         className="flex flex-col w-full gap-y-[1.4rem] mb-[2rem]"
         onSubmit={handleSubmitLogin}
@@ -55,7 +55,7 @@ const LoginPage = () => {
       <Link href="/signup" className="text-12-400-15 text-grey-700">
         회원가입
       </Link>
-    </main>
+    </>
   );
 };
 

@@ -12,7 +12,7 @@ const AuthLayout = ({ children }: React.PropsWithChildren) => {
       <header className="mb-[4rem]">
         <h1 className="text-24-500-30">{TITLE}</h1>
       </header>
-      {children}
+      <main className="flex flex-col w-full items-center">{children}</main>
     </div>
   );
 };
