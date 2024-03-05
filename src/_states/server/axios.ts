@@ -1,3 +1,6 @@
+"use client";
+
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/_constants";
 import axios, { AxiosInstance } from "axios";
 
 export const BaseInstanceConfig = {
@@ -10,8 +13,36 @@ export const BaseInstanceConfig = {
 
 export const instance: AxiosInstance = axios.create(BaseInstanceConfig);
 
-export const createInstance = (apiUrl: string) =>
-  axios.create({
-    ...BaseInstanceConfig,
-    baseURL: BaseInstanceConfig.baseURL + apiUrl,
-  });
+instance.interceptors.request.use(
+  (config) => {
+    if (typeof window !== "undefined") {
+      const ACCESS_TOKEN = localStorage.getItem(ACCESS_TOKEN_KEY);
+      if (ACCESS_TOKEN) {
+        config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
+      }
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// API상 refresh token으로 새 token 발급 하는 기능이 없음
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const REFRESH_TOKEN = localStorage.getItem(REFRESH_TOKEN_KEY);
+    if (error.status === 401 && REFRESH_TOKEN) {
+      const res = await instance.get("/user/checktoken", {
+        headers: { Authorization: `Bearer ${REFRESH_TOKEN}` },
+      });
+      if (!res.data.isValid) {
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
