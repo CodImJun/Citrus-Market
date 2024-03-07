@@ -29,7 +29,7 @@ export const Header = () => {
 
 const HeaderLayout = ({ children }: React.PropsWithChildren) => {
   return (
-    <header className="flex flex-row items-center justify-between h-[4.8rem] px-[1.6rem] border-b-[0.05rem] border-solid border-grey-300">
+    <header className="fixed flex flex-row bg-white w-full h-[4.8rem] items-center justify-between px-[1.6rem] border-b-[0.05rem] border-solid border-grey-300">
       {children}
     </header>
   );
