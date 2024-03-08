@@ -1,4 +1,5 @@
 export interface PostProps {
+  postListType: "default" | "album";
   username: string;
   accountname: string;
   content: string;
