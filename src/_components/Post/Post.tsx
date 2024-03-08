@@ -15,10 +15,10 @@ export const Post = ({
 }: PostProps) => {
   return (
     <article>
-      {type === "album" && (
+      {postListType === "album" && (
         <Image src="" alt="post image" width={114} height={114} />
       )}
-      {type === "default" && (
+      {postListType === "default" && (
         <>
           <Image
             // TODO: Add Image API
