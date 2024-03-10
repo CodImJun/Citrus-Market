@@ -19,6 +19,7 @@ const config: Config = {
           300: "#dbdbdb",
           500: "#c4c4c4",
           700: "#767676",
+          900: "#333333",
         },
         black: "#000000",
         white: "#ffffff",
