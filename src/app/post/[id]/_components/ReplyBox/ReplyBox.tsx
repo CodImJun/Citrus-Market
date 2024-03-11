@@ -12,7 +12,7 @@ export const ReplyBox = ({ profileImage = "" }: ReplyBoxProps) => {
     setReply(e.target.value);
 
   return (
-    <footer className="fixed bottom-0 w-full h-[6rem] flex gap-x-[1.6rem] items-center justify-between px-[1.6rem] py-[1.2rem] border-grey-100 border-solid border-t-[0.05rem]">
+    <footer className="fixed bottom-0 w-full h-[6rem] flex gap-x-[1.6rem] items-center justify-between px-[1.6rem] py-[1.2rem] border-grey-300 border-solid border-t-[0.05rem] bg-white">
       <Image
         src={profileImage}
         alt="profile image"
