@@ -2,15 +2,14 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import React from "react";
-
-const getQueryClient = React.cache(() => new QueryClient());
+import { useRef } from "react";
 
 export const Provider = ({ children }: React.PropsWithChildren) => {
-  const queryClient = getQueryClient();
+  const queryClientRef = useRef<QueryClient>(null!);
+  if (!queryClientRef.current) queryClientRef.current = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClientRef.current}>
       {children}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
