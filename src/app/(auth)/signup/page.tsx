@@ -1,72 +1,54 @@
 "use client";
 
-import { Button } from "@/_components";
+import { Button, FormInput } from "@/_components";
 import Link from "next/link";
-import { useInput } from "../_hooks";
-import { Input } from "../_components";
-import Image from "next/image";
+import { useSignUp } from "../_hooks";
 
 const SignUpPage = () => {
-  const [email, handleChangeEmail] = useInput("");
-  const [password, handleChangePassword] = useInput("");
-  const [username, handleChangeUsername] = useInput("");
-  const [accountname, handleChangeAccountname] = useInput("");
-  const [introduce, handleChangeIntroduce] = useInput("");
+  const {
+    handleSignUp,
+    imageRegister,
+    emailRegister,
+    passwordRegister,
+    usernameRegister,
+    accountnameRegister,
+    introduceRegister,
+    isValid,
+  } = useSignUp();
 
   return (
     <>
-      <form className="flex flex-col w-full gap-y-[1.4rem] mb-[2rem]">
-        <button type="button" className="relative w-fit mx-auto mb-[1.6rem]">
-          <Image
-            src="/basic-profile-img.png"
-            alt="basic profile image"
-            width={110}
-            height={110}
-          />
-          <Image
-            src="/upload-file.png"
-            alt="profile upload image"
-            width={36}
-            height={36}
-            className="absolute right-0 bottom-0"
-          />
-        </button>
-        <Input
-          labelName="email"
-          type="email"
-          value={email}
-          onChange={handleChangeEmail}
-          placeholder="이메일 주소를 입력해 주세요."
-        />
-        <Input
-          labelName="password"
+      <form
+        className="flex flex-col w-full gap-y-[1.4rem] mb-[2rem]"
+        onSubmit={handleSignUp}
+      >
+        {/* TODO: Add Image File Code - can't change image value */}
+        <FormInput type="image" labelName="image" {...imageRegister} />
+        <FormInput type="email" labelName="email" {...emailRegister} />
+        <FormInput
           type="password"
-          value={password}
-          onChange={handleChangePassword}
-          placeholder="비밀번호를 설정해주세요."
+          labelName="password"
+          autoComplete="off"
+          {...passwordRegister}
         />
-        <Input
-          labelName="username"
-          type="text"
-          value={username}
-          onChange={handleChangeUsername}
-          placeholder="2~10자 이내여야 합니다."
-        />
-        <Input
+        <FormInput type="username" labelName="username" {...usernameRegister} />
+        <FormInput
+          type="accountname"
           labelName="accountname"
-          type="email"
-          value={accountname}
-          onChange={handleChangeAccountname}
-          placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+          {...accountnameRegister}
         />
-        <Input
+        <FormInput
+          type="introduce"
           labelName="introduce"
-          type="email"
-          value={introduce}
-          onChange={handleChangeIntroduce}
-          placeholder="자신과 판매할 상품에 대해 소개해주세요!"
+          {...introduceRegister}
         />
-        <Button type="submit" size="L" w="w-full" className="mt=[1.4rem]">
+        <Button
+          type="submit"
+          size="L"
+          w="w-full"
+          className="mt=[1.4rem]"
+          disabled={!isValid}
+        >
           감귤마켓 시작하기
         </Button>
       </form>
