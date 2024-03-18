@@ -1,9 +1,43 @@
 import { forwardRef } from "react";
 import { FormInputProps } from "./FormInput.types";
 import { changeLabelNameToText } from "./FormInput.utils";
+import Image from "next/image";
 
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   ({ labelName, error, ...props }, ref) => {
+    if (labelName === "image")
+      return (
+        <label
+          htmlFor={labelName}
+          className="relative w-fit mx-auto mb-[1.6rem]"
+        >
+          <Image
+            src="/basic-profile-img.png"
+            alt="basic profile image"
+            width={110}
+            height={110}
+            priority
+          />
+          <Image
+            src="/upload-file.png"
+            alt="profile upload image"
+            width={36}
+            height={36}
+            className="absolute right-0 bottom-0"
+            priority
+          />
+          <input
+            ref={ref}
+            id="labelName"
+            type="file"
+            name="image"
+            accept="image/jpg, image/gif, image/png, image/bmp, image/tif, image/heic"
+            className="hidden"
+            {...props}
+          />
+        </label>
+      );
+
     return (
       <div className="flex flex-col gap-y-2">
         <label

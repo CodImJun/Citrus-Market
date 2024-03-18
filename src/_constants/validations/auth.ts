@@ -1,6 +1,8 @@
 import * as Yup from "yup";
 import { ERROR_MESSAGE } from "./message";
-import { PASSWORD_REGEX } from "./regex";
+import { ACCOUNTNAME_REGEX, PASSWORD_REGEX } from "./regex";
+
+const image = Yup.string();
 
 const email = Yup.string()
   .email(ERROR_MESSAGE.email.pattern)
@@ -12,7 +14,24 @@ const password = Yup.string()
   .matches(PASSWORD_REGEX, ERROR_MESSAGE.password.pattern)
   .required(ERROR_MESSAGE.password.required);
 
+const username = Yup.string().required(ERROR_MESSAGE.username.required);
+
+const accountname = Yup.string()
+  .matches(ACCOUNTNAME_REGEX, ERROR_MESSAGE.accountname.pattern)
+  .required(ERROR_MESSAGE.accountname.required);
+
+const introduce = Yup.string();
+
 export const LOGIN_SCHEMA = Yup.object({
-  email: email,
-  password: password,
+  email,
+  password,
+});
+
+export const SIGNUP_SCHEMA = Yup.object({
+  image,
+  email,
+  password,
+  username,
+  accountname,
+  introduce,
 });
