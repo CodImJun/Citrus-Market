@@ -1,5 +1,3 @@
-"use client";
-
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/_constants";
 import axios, { AxiosInstance } from "axios";
 
