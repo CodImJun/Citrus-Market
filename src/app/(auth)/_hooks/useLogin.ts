@@ -8,10 +8,10 @@ export const useLogin = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setError,
   } = useForm({
-    mode: "onSubmit",
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -33,5 +33,6 @@ export const useLogin = () => {
     handleLogin,
     emailRegister,
     passwordRegister,
+    isValid,
   };
 };

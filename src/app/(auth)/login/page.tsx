@@ -6,7 +6,7 @@ import { FormInput } from "@/_components/FormInput/FormInput";
 import { useLogin } from "../_hooks";
 
 const LoginPage = () => {
-  const { handleLogin, emailRegister, passwordRegister } = useLogin();
+  const { handleLogin, emailRegister, passwordRegister, isValid } = useLogin();
 
   return (
     <>
@@ -21,7 +21,13 @@ const LoginPage = () => {
           autoComplete="off"
           {...passwordRegister}
         />
-        <Button type="button" size="L" w="w-full" className="mt-[1.4rem]">
+        <Button
+          type="button"
+          size="L"
+          w="w-full"
+          className="mt-[1.4rem]"
+          disabled={!isValid}
+        >
           로그인
         </Button>
       </form>
