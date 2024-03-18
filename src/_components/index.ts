@@ -1,4 +1,5 @@
 export * from "./Button";
+export * from "./FormInput";
 export * from "./Header";
 export * from "./Icon";
 export * from "./MainLayout";
