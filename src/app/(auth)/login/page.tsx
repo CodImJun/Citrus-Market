@@ -1,53 +1,32 @@
 "use client";
 
-import { Button } from "@/_components";
-import { Input } from "../_components";
 import Link from "next/link";
-import { useState } from "react";
-import { useInput } from "../_hooks";
-import { UserApi } from "@/_apis/user/user";
+import { Button } from "@/_components";
+import { FormInput } from "@/_components/FormInput/FormInput";
+import { useLogin } from "../_hooks";
 
 const LoginPage = () => {
-  const [email, handleChangeEmail] = useInput("");
-  const [password, handleChangePassword] = useInput("");
-
-  const [error, setError] = useState("");
-  const handleSetError = () => setError("");
-
-  const isSubmitEnabled = email && password && !error;
-
-  const handleSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = UserApi.login({ email, password });
-    console.log(res);
-  };
+  const { handleLogin, emailRegister, passwordRegister, isValid } = useLogin();
 
   return (
     <>
       <form
         className="flex flex-col w-full gap-y-[1.4rem] mb-[2rem]"
-        onSubmit={handleSubmitLogin}
+        onSubmit={handleLogin}
       >
-        <Input
-          labelName="email"
-          type="email"
-          value={email}
-          onChange={handleChangeEmail}
-        />
-        <Input
-          labelName="password"
+        <FormInput type="email" labelName="email" {...emailRegister} />
+        <FormInput
           type="password"
-          value={password}
-          onChange={handleChangePassword}
-          error={error}
-          setError={handleSetError}
+          labelName="password"
+          autoComplete="off"
+          {...passwordRegister}
         />
         <Button
-          type="submit"
+          type="button"
           size="L"
           w="w-full"
           className="mt-[1.4rem]"
-          disabled={!isSubmitEnabled}
+          disabled={!isValid}
         >
           로그인
         </Button>
