@@ -1,34 +1,34 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useCreateQuery } from "@/_hooks";
-import { isEnterPress, isEmptyString } from "@/_utils";
+import { useKeywordStore } from "@/_states";
+import { debounce } from "lodash";
+import { useEffect, useState } from "react";
 
 export const SearchBar = () => {
-  const router = useRouter();
-  const { pathname, createQuery } = useCreateQuery();
-  const [searchWord, setSearchWord] = useState("");
+  const [value, setValue] = useState("");
+  const { onChangeKeyword } = useKeywordStore();
 
-  const handleSubmit = () => {
-    const query = createQuery("word", searchWord);
-    isEmptyString(searchWord) ? router.push(pathname) : router.push(query);
+  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
   };
 
-  const handleChangeSearchWord = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchWord(e.target.value);
+  useEffect(() => {
+    const handleChangeKeyword = debounce(() => {
+      onChangeKeyword(value);
+    }, 500);
 
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) =>
-    isEnterPress(e) && handleSubmit();
+    handleChangeKeyword();
+
+    return () => handleChangeKeyword.cancel();
+  }, [value, onChangeKeyword]);
 
   return (
     <input
       className="w-[31.6rem] h-[3.2rem] rounded-[3.2rem] px-[1.6rem] placeholder:text-grey-500 bg-grey-100 text-14-400-17.5"
       type="text"
       placeholder="계정 검색"
-      value={searchWord}
-      onChange={handleChangeSearchWord}
-      onKeyDown={handleEnterPress}
+      value={value}
+      onChange={handleChangeValue}
     />
   );
 };
