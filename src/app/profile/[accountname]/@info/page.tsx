@@ -1,26 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { Button, ImageWithFallback, Post } from "@/_components";
-import { Follow } from "../_components";
+import { Button, ImageWithFallback } from "@/_components";
+import { Follow } from "@/_components";
 import { useGetPersonalProfile } from "../_states";
+import { ProfilePageProps } from "../page.types";
 
-type ProfileInfoPageProps = {
-  params: {
-    accountname: string;
-  };
-};
-
-// const ProfileInfoPage = ({ params }: ProfileInfoPageProps) => {
-const ProfileInfoPage = () => {
-  // const { postListType } = usePostTypeStore();
+const ProfileInfoPage = ({ params }: ProfilePageProps) => {
   const {
     data: profileInfo,
     isSuccess,
     isError,
     isLoading,
-  } = useGetPersonalProfile("Ddididi");
-  console.log(profileInfo);
+  } = useGetPersonalProfile(params.accountname);
 
   if (isLoading) return null;
   if (isError) return null;
@@ -49,7 +41,12 @@ const ProfileInfoPage = () => {
             type="button"
             className="flex items-center justify-center w-[3.4rem] h-[3.4rem] rounded-full border-[0.1rem] border-solid border-grey-300"
           >
-            <Image src="" alt="chat" width={20} height={20} />
+            <Image
+              src="/icon-message-circle.png"
+              alt="chat"
+              width={20}
+              height={20}
+            />
           </button>
           <Button size="M" w="w-[12rem]" active={profileInfo.isfollow}>
             {profileInfo.isfollow ? "언팔로우" : "팔로우"}
@@ -58,7 +55,7 @@ const ProfileInfoPage = () => {
             type="button"
             className="flex items-center justify-center w-[3.4rem] h-[3.4rem] rounded-full border-[0.1rem] border-solid border-grey-300"
           >
-            <Image src="" alt="share" width={20} height={20} />
+            <Image src="/icon-share.png" alt="share" width={20} height={20} />
           </button>
         </div>
       </section>
