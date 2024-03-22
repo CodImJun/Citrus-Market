@@ -2,6 +2,7 @@ export * from "./Button";
 export * from "./FormInput";
 export * from "./Header";
 export * from "./Icon";
+export * from "./ImageWithFallback";
 export * from "./MainLayout";
 export * from "./Navigation";
 export * from "./Post";
