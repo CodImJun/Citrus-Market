@@ -21,5 +21,5 @@ export type GetProductListResponse = {
       followerCount: number;
       followingCount: number;
     };
-  };
+  }[];
 };
