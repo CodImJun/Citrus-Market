@@ -1,14 +1,16 @@
 import { create } from "zustand";
 
-type PostTypeState = {
+type PostTypeStoreState = {
   postListType: "default" | "album";
 };
 
-type PostTypeActions = {
+type PostTypeStoreActions = {
   changePostType: () => void;
 };
 
-export const usePostType = create<PostTypeState & PostTypeActions>((set) => ({
+export const usePostTypeStore = create<
+  PostTypeStoreState & PostTypeStoreActions
+>((set) => ({
   postListType: "default",
   changePostType: () =>
     set((state) => {
