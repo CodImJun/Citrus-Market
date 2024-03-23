@@ -13,16 +13,16 @@ export const Header = () => {
   const searchParams = useSearchParams();
   const CHAT_NAME = searchParams.get("chat-name") ?? "";
 
-  switch (pathname) {
+  switch (true) {
     default:
       return <BasicHeader />;
-    case "/":
+    case pathname === "/":
       return <MainHeader />;
-    case "/search":
+    case pathname === "/search":
       return <SearchHeader />;
-    case "/upload":
+    case pathname.startsWith("/upload"):
       return <UploadHeader buttonDisabled={true} />;
-    case "/chat":
+    case pathname === "/chat":
       return <ChatHeader chatName={CHAT_NAME} />;
   }
 };
@@ -67,7 +67,7 @@ const UploadHeader = ({ buttonDisabled = false }: UploadHeaderProps) => {
     <HeaderLayout>
       <BackIcon />
       <Button w="w-[9rem]" size="MS" disabled={buttonDisabled}>
-        저장
+        업로드
       </Button>
     </HeaderLayout>
   );
