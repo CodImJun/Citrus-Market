@@ -16,10 +16,8 @@ const ProfilePageLayout = ({
       <Header />
       <main className="flex flex-col pt-[4.8rem] pb-[6rem]">
         {info}
-        <hr className="border-y-[0.3rem] border-grey-100" />
-        {posts}
-        <hr className="border-y-[0.3rem] border-grey-100" />
         {products}
+        {posts}
       </main>
       <Navigation />
     </>
