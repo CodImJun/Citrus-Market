@@ -3,7 +3,7 @@ import {
   GetFollowingPostListRequest,
   GetFollowingPostListResponse,
   GetMyPostListRequest,
-  GetMyPostListresponse,
+  GetMyPostListResponse,
 } from "./post.types";
 
 export const PostAPI = {
@@ -19,7 +19,7 @@ export const PostAPI = {
   },
   // 5.3
   getMyPostList: async ({ accountname }: GetMyPostListRequest) => {
-    const { data } = await instance.get<GetMyPostListresponse>(
+    const { data } = await instance.get<GetMyPostListResponse>(
       `/post/${accountname}/userpost`
     );
     return data.post;

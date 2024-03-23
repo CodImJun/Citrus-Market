@@ -6,6 +6,6 @@ export const ProductAPI = {
     const { data } = await instance.get<GetProductListResponse>(
       `/product/${accountname}`
     );
-    return data;
+    return data.product;
   },
 };

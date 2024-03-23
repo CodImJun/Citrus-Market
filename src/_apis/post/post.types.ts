@@ -31,9 +31,9 @@ export type GetFollowingPostListResponse = {
 export type GetMyPostListRequest = {
   accountname: string;
 };
-export type GetMyPostListresponse = {
+export type GetMyPostListResponse = {
   post: {
-    id: string;
+    _id: string;
     content: string;
     image: string;
     createdAt: string;
@@ -44,6 +44,7 @@ export type GetMyPostListresponse = {
     author: {
       _id: string;
       username: string;
+      accountname: string;
       intro: string;
       image: string;
       isfollow: boolean;
@@ -52,5 +53,5 @@ export type GetMyPostListresponse = {
       followerCount: number;
       followingCount: number;
     };
-  };
+  }[];
 };
