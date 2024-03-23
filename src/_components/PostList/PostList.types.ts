@@ -1,24 +1,7 @@
+import { GetMyPostListResponse } from "@/_apis/post/post.types";
+
 export type PostListProps = {
-  list: {
-    id: string;
-    content: string;
-    image: string;
-    createdAt: string;
-    updatedAt: string;
-    hearted: boolean;
-    heartCount: number;
-    commentCount: number;
-    author: {
-      _id: string;
-      username: string;
-      accountname: string;
-      intro: string;
-      image: string;
-      isfollow: boolean;
-      follower: string[];
-      following: string[];
-      followerCount: number;
-      followingCount: number;
-    };
-  }[];
+  page: "main" | "profile";
+  postType: "default" | "album";
+  list: GetMyPostListResponse["post"];
 };
