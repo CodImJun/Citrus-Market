@@ -33,6 +33,7 @@ export const Button = ({ children, size, w, ...props }: ButtonProps) => {
         props.className
       }`}
       disabled={props.disabled}
+      {...props}
     >
       {children}
     </button>
