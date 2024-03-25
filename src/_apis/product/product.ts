@@ -19,11 +19,11 @@ export const ProductAPI = {
     price,
     link,
   }: UploadProductRequest) => {
-    const { data } = await instance.post<UploadProductResponse>("/post", {
+    const { data } = await instance.post<UploadProductResponse>("/product", {
       product: {
         itemImage,
         itemName,
-        price,
+        price: +price,
         link,
       },
     });
