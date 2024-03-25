@@ -28,6 +28,7 @@ const ProfileInfoPage = ({ params }: ProfilePageProps) => {
             height={110}
             className="rounded-full"
             fallbackSrc="/basic-profile-img.png"
+            priority
           />
           <Follow type="following" count={profileInfo.followingCount} />
         </div>

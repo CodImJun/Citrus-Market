@@ -9,7 +9,7 @@ import { Button } from "../Button";
 import { ChatHeaderProps, UploadHeaderProps } from "./Header.types";
 
 export const Header = (props: {
-  isValid: boolean;
+  isValid?: boolean;
   uploadEvent?: () => void;
 }) => {
   const pathname = usePathname();
