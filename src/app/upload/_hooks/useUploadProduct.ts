@@ -8,7 +8,7 @@ import { useImageUpload } from "@/_hooks";
 import { UPLOAD_SCHEMA } from "../_constants";
 import { ImageAPI } from "@/_apis";
 
-type useUploadProductValues = {
+type UseUploadProductValues = {
   itemImage: string;
   itemName: string;
   price: number;
@@ -22,13 +22,13 @@ export const useUploadProduct = () => {
     handleSubmit,
     formState: { errors, isValid },
     setValue,
-  } = useForm<useUploadProductValues>({
+  } = useForm<UseUploadProductValues>({
     mode: "onChange",
     defaultValues: {
-      itemImage: undefined,
-      itemName: undefined,
+      itemImage: "",
+      itemName: "",
       price: undefined,
-      link: undefined,
+      link: "",
     },
     resolver: yupResolver<any>(UPLOAD_SCHEMA.product),
   });
@@ -52,16 +52,15 @@ export const useUploadProduct = () => {
 
   const handleUploadProduct = handleSubmit(async (data) => {
     const formData = new FormData();
-    formData.append("image", data.itemImage);
+    formData.append("image", data.itemImage as string | Blob);
 
     const imageData = await ImageAPI.uploadSingleImage(formData);
 
-    data = {
+    mutate({
       ...data,
+      price: +data.price,
       itemImage: "https://api.mandarin.weniv.co.kr/" + imageData.filename,
-    };
-
-    mutate(data);
+    });
   });
 
   return {
