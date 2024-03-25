@@ -1,24 +1,26 @@
-import { useState } from "react";
-import { UseFormSetValue } from "react-hook-form";
+import { Dispatch, SetStateAction } from "react";
+import { FieldValues, Path, PathValue, UseFormSetValue } from "react-hook-form";
 
-export const useImageUpload = (
-  setValue: UseFormSetValue<any>,
-  fieldName: string
-) => {
-  const [previewImage, setPreviewImage] = useState("");
+type UseImageUploadProps<T extends FieldValues> = {
+  setValue: UseFormSetValue<T>;
+  fieldName: string;
+  setPreviewImage: Dispatch<SetStateAction<string>>;
+};
 
+export const useImageUpload = <T extends FieldValues>({
+  setValue,
+  fieldName,
+  setPreviewImage,
+}: UseImageUploadProps<T>) => {
   const handleUploadPreviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0] as PathValue<T, Path<T>>;
     if (file) {
-      const reader = new FileReader();
+      const src = URL.createObjectURL(file);
 
-      reader.onloadend = () => {
-        setPreviewImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      setValue(fieldName, file, { shouldValidate: true });
+      setPreviewImage(src);
+      setValue(fieldName as Path<T>, file, { shouldValidate: true });
     }
   };
 
-  return { previewImage, handleUploadPreviewImage };
+  return { handleUploadPreviewImage };
 };

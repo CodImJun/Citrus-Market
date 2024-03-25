@@ -1,7 +1,10 @@
 import { instance } from "@/_states";
 import { UploadImageResponse } from "./image.types";
 
-const uploadImage = async (url: string, formData: FormData) => {
+const uploadImage = async (url: string, file: File) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
   const { data } = await instance.post<UploadImageResponse>(url, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -11,10 +14,10 @@ const uploadImage = async (url: string, formData: FormData) => {
 };
 
 export const ImageAPI = {
-  uploadSingleImage: (formData: FormData) => {
-    return uploadImage("/image/uploadfile", formData);
+  uploadSingleImage: async (file: File) => {
+    return uploadImage("/image/uploadfile", file);
   },
-  uploadMultipleImage: (formData: FormData) => {
-    return uploadImage("/image/uploadfiles", formData);
+  uploadMultipleImage: (file: File) => {
+    return uploadImage("/image/uploadfiles", file);
   },
 };

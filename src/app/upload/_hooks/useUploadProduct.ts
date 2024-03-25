@@ -9,7 +9,7 @@ import { UPLOAD_SCHEMA } from "../_constants";
 import { ImageAPI } from "@/_apis";
 
 type UseUploadProductValues = {
-  itemImage: string;
+  itemImage: File;
   itemName: string;
   price: number;
   link: string;
@@ -25,37 +25,21 @@ export const useUploadProduct = () => {
   } = useForm<UseUploadProductValues>({
     mode: "onChange",
     defaultValues: {
-      itemImage: "",
+      itemImage: undefined,
       itemName: "",
       price: undefined,
       link: "",
     },
     resolver: yupResolver<any>(UPLOAD_SCHEMA.product),
   });
-  const { previewImage, handleUploadPreviewImage } = useImageUpload(
-    setValue,
-    "itemImage"
-  );
 
-  const [imgRegister, itemNameRegister, linkRegister] = useRegisterFormField(
-    register,
-    errors,
-    ["itemImage", "itemName", "link"]
-  );
-
-  const itemImageRegister = {
-    ...imgRegister,
-    onChange: handleUploadPreviewImage,
-  };
+  const [itemImageRegister, itemNameRegister, linkRegister] =
+    useRegisterFormField(register, errors, ["itemImage", "itemName", "link"]);
 
   const { mutate } = useUploadProductMutate();
 
   const handleUploadProduct = handleSubmit(async (data) => {
-    const formData = new FormData();
-    formData.append("image", data.itemImage as string | Blob);
-
-    const imageData = await ImageAPI.uploadSingleImage(formData);
-
+    const imageData = await ImageAPI.uploadSingleImage(data.itemImage);
     mutate({
       ...data,
       price: +data.price,
@@ -65,7 +49,7 @@ export const useUploadProduct = () => {
 
   return {
     mutate,
-    previewImage,
+    setValue,
     control,
     isValid,
     itemImageRegister,
