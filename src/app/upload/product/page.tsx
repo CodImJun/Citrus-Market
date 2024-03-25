@@ -1,13 +1,13 @@
 "use client";
 
-import { Header, ImageUploadButton, MainLayout } from "@/_components";
+import { Header, MainLayout, PreviewImageUpload } from "@/_components";
 import { forwardRef, InputHTMLAttributes } from "react";
-import { useUploadProduct } from "../_hooks/useUploadProduct";
+import { useUploadProduct } from "../_hooks";
 import { Controller } from "react-hook-form";
 
 const UploadProductPage = () => {
   const {
-    previewImage,
+    setValue,
     control,
     isValid,
     itemImageRegister,
@@ -23,20 +23,11 @@ const UploadProductPage = () => {
         <form className="flex flex-col gap-y-[1.4rem] px-[3.4rem] py-[3rem]">
           <div className="flex flex-col gap-y-[1.8rem] text-12-500-15 text-grey-700">
             이미지 등록
-            <div
-              className={`relative h-[20.4rem] mb-[1.4rem] rounded-[1rem] bg-grey-300`}
-              style={{
-                backgroundImage: previewImage ? `url(${previewImage})` : "none",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-              }}
-            >
-              <ImageUploadButton
-                position="right-[1.2rem] bottom-[1.2rem]"
-                {...itemImageRegister}
-              />
-            </div>
+            <PreviewImageUpload
+              layout="product"
+              register={itemImageRegister}
+              setValue={setValue}
+            />
           </div>
 
           <ProductInput
