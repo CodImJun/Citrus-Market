@@ -12,7 +12,9 @@ export const ImageWithFallback = ({
   ...props
 }: ImageWithFallback) => {
   const { src, alt, ...rest } = props;
-  const [imageUrl, setImageUrl] = useState(src);
+  const [imageUrl, setImageUrl] = useState(
+    String(src).includes("weniv") ? src : fallbackSrc
+  );
 
   const handleChangeImage = () => setImageUrl(fallbackSrc);
 

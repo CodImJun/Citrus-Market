@@ -1,5 +1,10 @@
 import { instance } from "@/_states";
-import { GetProductListRequest, GetProductListResponse } from "./product.types";
+import {
+  GetProductListRequest,
+  GetProductListResponse,
+  UploadProductRequest,
+  UploadProductResponse,
+} from "./product.types";
 
 export const ProductAPI = {
   getProductList: async ({ accountname }: GetProductListRequest) => {
@@ -7,5 +12,21 @@ export const ProductAPI = {
       `/product/${accountname}`
     );
     return data.product;
+  },
+  uploadProduct: async ({
+    itemImage,
+    itemName,
+    price,
+    link,
+  }: UploadProductRequest) => {
+    const { data } = await instance.post<UploadProductResponse>("/product", {
+      product: {
+        itemImage,
+        itemName,
+        price: +price,
+        link,
+      },
+    });
+    return data;
   },
 };

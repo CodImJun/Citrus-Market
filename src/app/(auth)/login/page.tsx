@@ -21,13 +21,7 @@ const LoginPage = () => {
           autoComplete="off"
           {...passwordRegister}
         />
-        <Button
-          type="button"
-          size="L"
-          w="w-full"
-          className="mt-[1.4rem]"
-          disabled={!isValid}
-        >
+        <Button size="L" w="w-full" disabled={!isValid}>
           로그인
         </Button>
       </form>

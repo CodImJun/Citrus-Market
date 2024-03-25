@@ -8,21 +8,29 @@ import { Button } from "../Button";
 
 import { ChatHeaderProps, UploadHeaderProps } from "./Header.types";
 
-export const Header = () => {
+export const Header = (props: {
+  isValid?: boolean;
+  uploadEvent?: () => void;
+}) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const CHAT_NAME = searchParams.get("chat-name") ?? "";
 
-  switch (pathname) {
+  switch (true) {
     default:
       return <BasicHeader />;
-    case "/":
+    case pathname === "/":
       return <MainHeader />;
-    case "/search":
+    case pathname === "/search":
       return <SearchHeader />;
-    case "/upload":
-      return <UploadHeader buttonDisabled={true} />;
-    case "/chat":
+    case pathname.startsWith("/upload"):
+      return (
+        <UploadHeader
+          buttonDisabled={props.isValid}
+          uploadEvent={props.uploadEvent}
+        />
+      );
+    case pathname === "/chat":
       return <ChatHeader chatName={CHAT_NAME} />;
   }
 };
@@ -62,12 +70,17 @@ const MainHeader = () => {
   );
 };
 
-const UploadHeader = ({ buttonDisabled = false }: UploadHeaderProps) => {
+const UploadHeader = ({ buttonDisabled, uploadEvent }: UploadHeaderProps) => {
   return (
     <HeaderLayout>
       <BackIcon />
-      <Button w="w-[9rem]" size="MS" disabled={buttonDisabled}>
-        저장
+      <Button
+        w="w-[9rem]"
+        size="MS"
+        disabled={buttonDisabled}
+        onClick={uploadEvent}
+      >
+        업로드
       </Button>
     </HeaderLayout>
   );
