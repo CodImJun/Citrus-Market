@@ -42,13 +42,7 @@ const SignUpPage = () => {
           labelName="introduce"
           {...introduceRegister}
         />
-        <Button
-          type="submit"
-          size="L"
-          w="w-full"
-          className="mt=[1.4rem]"
-          disabled={!isValid}
-        >
+        <Button size="L" w="w-full" disabled={!isValid}>
           감귤마켓 시작하기
         </Button>
       </form>
