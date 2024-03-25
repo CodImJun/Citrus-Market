@@ -9,4 +9,5 @@ export * from "./MainLayout";
 export * from "./Navigation";
 export * from "./Post";
 export * from "./PostList";
+export * from "./PreviewImageUpload";
 export * from "./SearchBar";
