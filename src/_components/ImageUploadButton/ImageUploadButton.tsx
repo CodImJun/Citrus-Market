@@ -6,7 +6,7 @@ import { ImageUploadButtonProps } from "./ImageUploadButton.types";
 export const ImageUploadButton = forwardRef<
   HTMLInputElement,
   ImageUploadButtonProps
->(({ position, ...props }, ref) => {
+>(({ position, multiple = false, ...props }, ref) => {
   const pathname = usePathname();
   const BOX_SIZE =
     pathname === "/upload/post" ? `w-[5rem] h-[5rem]` : `w-[3.6rem] h-[3.6rem]`;
@@ -31,6 +31,7 @@ export const ImageUploadButton = forwardRef<
         type="file"
         id="upload-image"
         className="hidden"
+        multiple
         accept="image/jpg, image/gif, image/png, image/bmp, image/tif, image/heic"
         {...props}
       />
