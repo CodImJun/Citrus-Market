@@ -8,13 +8,11 @@ import { isNotEmptyArray } from "@/_utils";
 
 const ProfilePostListPage = ({ params }: ProfilePageProps) => {
   const {
-    data: postList = [],
+    data: postList,
     isLoading,
     isError,
     isSuccess,
   } = useGetMyPostList(params.accountname);
-
-  console.log(postList);
 
   if (isLoading) return null;
   if (isError) return null;
@@ -32,6 +30,7 @@ const ProfilePostListPage = ({ params }: ProfilePageProps) => {
                     alt="post list"
                     width={26}
                     height={26}
+                    priority
                   />
                 </button>
                 <button type="button">
@@ -40,6 +39,7 @@ const ProfilePostListPage = ({ params }: ProfilePageProps) => {
                     alt="post album"
                     width={26}
                     height={26}
+                    priority
                   />
                 </button>
               </div>

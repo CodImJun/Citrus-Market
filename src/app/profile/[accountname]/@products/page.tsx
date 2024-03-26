@@ -13,7 +13,6 @@ const ProfileProductListPage = ({ params }: ProfilePageProps) => {
     isError,
     isLoading,
   } = useGetProductList(params.accountname);
-  console.log(productList);
 
   if (isLoading) return null;
   if (isError) return null;
@@ -37,8 +36,9 @@ const ProfileProductListPage = ({ params }: ProfilePageProps) => {
                           alt="product image"
                           width={140}
                           height={90}
-                          className="rounded-[0.8rem]"
+                          className="rounded-[0.8rem] w-auto h-auto"
                           fallbackSrc="/icon-delete.png"
+                          priority
                         />
                         <p className="text-14-400-17.5 text-black mt-[0.6rem] mb-[0.4rem]">
                           {item.itemName}

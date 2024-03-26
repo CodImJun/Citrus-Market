@@ -1,7 +1,13 @@
 import { ButtonProps } from "./Button.types";
 
-export const Button = ({ children, size, w, ...props }: ButtonProps) => {
-  const isActive = "active" in props && props.active;
+export const Button = ({
+  children,
+  size,
+  w,
+  active,
+  ...props
+}: ButtonProps) => {
+  const isActive = active;
 
   const WIDTH_HEIGHT_RADIUS = {
     L: `${w} h-[4.4rem] rounded-[4.4rem]`,
