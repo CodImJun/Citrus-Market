@@ -1,5 +1,7 @@
 import { instance } from "@/_states/server";
 import {
+  CreatePostRequest,
+  CreatePostResponse,
   GetFollowingPostListRequest,
   GetFollowingPostListResponse,
   GetMyPostListRequest,
@@ -7,6 +9,17 @@ import {
 } from "./post.types";
 
 export const PostAPI = {
+  // 5.1
+  createPost: async ({ content, image }: CreatePostRequest) => {
+    const { data } = await instance.post<CreatePostResponse>("/post", {
+      post: {
+        content,
+        image,
+      },
+    });
+    console.log(data);
+    return data;
+  },
   // 5.2
   getFollowingPostList: async ({
     limit = 5,

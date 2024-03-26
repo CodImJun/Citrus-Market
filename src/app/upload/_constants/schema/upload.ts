@@ -7,6 +7,7 @@ const itemImage = Yup.mixed()
 const itemName = Yup.string().required();
 const price = Yup.number().required();
 const link = Yup.string().required();
+const content = Yup.string().required();
 
 export const UPLOAD_SCHEMA = {
   product: Yup.object().shape({
@@ -14,5 +15,9 @@ export const UPLOAD_SCHEMA = {
     itemName,
     price,
     link,
+  }),
+  post: Yup.object().shape({
+    image: itemImage,
+    content,
   }),
 };

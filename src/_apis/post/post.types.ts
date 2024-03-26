@@ -1,3 +1,33 @@
+// 5.1
+export type CreatePostRequest = {
+  content: string;
+  image: string;
+};
+export type CreatePostResponse = {
+  post: {
+    id: string;
+    content: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+    hearted: boolean;
+    heartCount: number;
+    commentCount: number;
+    author: {
+      _id: string;
+      username: string;
+      accountname: string;
+      intro: string;
+      image: string;
+      isfollow: boolean;
+      following: string[];
+      follower: string[];
+      followerCount: number;
+      followingCount: number;
+    };
+  };
+};
+
 // 5.2
 export type GetFollowingPostListRequest = {
   limit?: number;

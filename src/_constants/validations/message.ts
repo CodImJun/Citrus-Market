@@ -1,5 +1,9 @@
 export const ERROR_MESSAGE = {
-  image: {},
+  image: {
+    max: "이미지를 3개 이하로 선택해주세요",
+    size: "이미지는 10MB 이하여야 합니다",
+    required: "이미지는 필수입니다",
+  },
   email: {
     required: "이메일을 입력해주세요",
     pattern: "이메일 형식을 입력해주세요",
