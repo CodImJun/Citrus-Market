@@ -1,11 +1,18 @@
 import { instance } from "@/_states";
 import { UploadImageResponse } from "./image.types";
 
-const uploadImage = async (url: string, file: File) => {
+const uploadImage = async (url: string, file: File | File[]) => {
   const formData = new FormData();
-  formData.append("image", file);
 
-  const { data } = await instance.post<UploadImageResponse>(url, formData, {
+  if (Array.isArray(file)) {
+    file.forEach((item) => formData.append("image", item));
+  } else {
+    formData.append("image", file);
+  }
+
+  const { data } = await instance.post<
+    UploadImageResponse | UploadImageResponse[]
+  >(url, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -15,9 +22,9 @@ const uploadImage = async (url: string, file: File) => {
 
 export const ImageAPI = {
   uploadSingleImage: async (file: File) => {
-    return uploadImage("/image/uploadfile", file);
+    return await uploadImage("/image/uploadfile", file);
   },
-  uploadMultipleImage: (file: File) => {
-    return uploadImage("/image/uploadfiles", file);
+  uploadMultipleImage: async (file: File[]) => {
+    return await uploadImage("/image/uploadfiles", file);
   },
 };
