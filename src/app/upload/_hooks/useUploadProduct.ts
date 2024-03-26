@@ -4,7 +4,6 @@ import { useRegisterFormField } from "@/app/(auth)/_hooks";
 import { useForm } from "react-hook-form";
 import { useUploadProductMutate } from "../_states";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useImageUpload } from "@/_hooks";
 import { UPLOAD_SCHEMA } from "../_constants";
 import { ImageAPI } from "@/_apis";
 
@@ -40,11 +39,13 @@ export const useUploadProduct = () => {
 
   const handleUploadProduct = handleSubmit(async (data) => {
     const imageData = await ImageAPI.uploadSingleImage(data.itemImage);
-    mutate({
-      ...data,
-      price: +data.price,
-      itemImage: "https://api.mandarin.weniv.co.kr/" + imageData.filename,
-    });
+    if (!Array.isArray(imageData)) {
+      mutate({
+        ...data,
+        price: +data.price,
+        itemImage: "https://api.mandarin.weniv.co.kr/" + imageData.filename,
+      });
+    }
   });
 
   return {

@@ -24,7 +24,7 @@ export const ImageAPI = {
   uploadSingleImage: async (file: File) => {
     return await uploadImage("/image/uploadfile", file);
   },
-  uploadMultipleImage: async (file: File[]) => {
-    return await uploadImage("/image/uploadfiles", file);
+  uploadMultipleImage: async (files: File[]) => {
+    return await uploadImage("/image/uploadfiles", files);
   },
 };
