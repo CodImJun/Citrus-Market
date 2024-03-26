@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { PostProps } from "./Post.types";
 import Link from "next/link";
+import { ImageWithFallback } from "../ImageWithFallback";
 
 export const Post = ({
   postListType,
@@ -20,13 +21,14 @@ export const Post = ({
       )}
       {postListType === "default" && (
         <>
-          <Image
-            // TODO: Add Image API
-            src="/basic-profile-img.png"
+          <ImageWithFallback
+            src={profileImage}
+            fallbackSrc="/basic-profile-img.png"
             alt="profile image"
             width={42}
             height={42}
             className="float-left mr-[1.2rem]"
+            priority
           />
           <div className="flex flex-col gap-y-[1.2rem] ">
             <header className="flex flex-row items-start justify-between">
@@ -40,17 +42,19 @@ export const Post = ({
                   alt="feed more button"
                   width={18}
                   height={18}
+                  priority
                 />
               </button>
             </header>
             <main className="flex flex-col gap-y-[1.2rem] mt-[0.4rem]">
               <p>{content}</p>
               <Image
-                src=""
+                src={contentImage}
                 alt="image"
                 width={304}
                 height={208}
                 className="rounded-[1rem]"
+                priority
               />
             </main>
             <footer className="flex flex-col gap-y-[1.6rem]">
@@ -64,6 +68,7 @@ export const Post = ({
                     alt="heart"
                     width={20}
                     height={20}
+                    priority
                   />
                   <span className="text-12-400-12 text-grey-700">
                     {heartCount}
@@ -78,6 +83,7 @@ export const Post = ({
                     alt="comment"
                     width={20}
                     height={20}
+                    priority
                   />
                   <span className="text-12-400-12 text-grey-700">
                     {commentCount}

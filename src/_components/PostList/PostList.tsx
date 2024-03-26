@@ -23,8 +23,12 @@ export const PostList = ({ list, postType, page }: PostListProps) => {
             heartCount={post.heartCount}
             commentCount={post.commentCount}
             createdAt={new Date(post.createdAt)}
-            profileImage={post.author.image}
-            contentImage={post.image}
+            profileImage={
+              "https://api.mandarin.weniv.co.kr/" + post.author.image
+            }
+            contentImage={
+              "https://api.mandarin.weniv.co.kr/" + post.image.split(", ")[0]
+            }
           />
         </li>
       ))}
