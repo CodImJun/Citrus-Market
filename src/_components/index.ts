@@ -7,7 +7,7 @@ export * from "./ImageUploadButton";
 export * from "./ImageWithFallback";
 export * from "./MainLayout";
 export * from "./Navigation";
-export * from "./Post";
+export * from "./PostItem";
 export * from "./PostList";
 export * from "./PreviewImageUpload";
 export * from "./SearchBar";
