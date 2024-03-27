@@ -1,87 +1,24 @@
+import { PaginationType, PostType } from "@/_types";
+
 // 5.1
 export type CreatePostRequest = {
   content: string;
   image: string;
 };
 export type CreatePostResponse = {
-  post: {
-    id: string;
-    content: string;
-    image: string;
-    createdAt: string;
-    updatedAt: string;
-    hearted: boolean;
-    heartCount: number;
-    commentCount: number;
-    author: {
-      _id: string;
-      username: string;
-      accountname: string;
-      intro: string;
-      image: string;
-      isfollow: boolean;
-      following: string[];
-      follower: string[];
-      followerCount: number;
-      followingCount: number;
-    };
-  };
+  post: PostType;
 };
 
 // 5.2
-export type GetFollowingPostListRequest = {
-  limit?: number;
-  skip?: number;
-};
+export type GetFollowingPostListRequest = PaginationType;
 export type GetFollowingPostListResponse = {
-  posts: {
-    id: string;
-    content: string;
-    image: string;
-    createdAt: string;
-    updatedAt: string;
-    hearted: boolean;
-    heartCount: number;
-    commentCount: number;
-    author: {
-      _id: string;
-      username: string;
-      accountname: string;
-      intro: string;
-      image: string;
-      isfollow: boolean;
-      follower: string[];
-      following: string[];
-      followerCount: number;
-      followingCount: number;
-    };
-  }[];
+  posts: PostType[];
 };
+
 // 5.3
 export type GetMyPostListRequest = {
   accountname: string;
 };
 export type GetMyPostListResponse = {
-  post: {
-    _id: string;
-    content: string;
-    image: string;
-    createdAt: string;
-    updatedAt: string;
-    hearted: boolean;
-    heartCount: number;
-    commentCount: number;
-    author: {
-      _id: string;
-      username: string;
-      accountname: string;
-      intro: string;
-      image: string;
-      isfollow: boolean;
-      following: string[];
-      follower: string[];
-      followerCount: number;
-      followingCount: number;
-    };
-  }[];
+  post: PostType[];
 };

@@ -1,53 +1,17 @@
+import { ProductType } from "@/_types";
+
 export type GetProductListRequest = {
   accountname: string;
 };
 export type GetProductListResponse = {
   data: number;
-  product: {
-    id: string;
-    itemName: string;
-    price: string;
-    link: string;
-    itemImage: string;
-    author: {
-      _id: string;
-      username: string;
-      accountname: string;
-      intro: string;
-      image: string;
-      isfollow: boolean;
-      following: string[];
-      follower: string[];
-      followerCount: number;
-      followingCount: number;
-    };
-  }[];
+  product: ProductType[];
 };
 
-export type UploadProductRequest = {
-  itemImage: string;
-  itemName: string;
-  price: number;
-  link: string;
-};
+export type UploadProductRequest = Pick<
+  ProductType,
+  "itemImage" | "itemName" | "price" | "link"
+>;
 export type UploadProductResponse = {
-  product: {
-    id: string;
-    itemImage: string;
-    itemName: string;
-    price: number;
-    link: string;
-    author: {
-      _id: string;
-      username: string;
-      accountname: string;
-      intro: string;
-      image: string;
-      isfollow: boolean;
-      following: string[];
-      follower: string[];
-      followerCount: number;
-      followingCount: number;
-    };
-  };
+  product: ProductType;
 };
