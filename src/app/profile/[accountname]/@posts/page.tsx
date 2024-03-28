@@ -1,10 +1,11 @@
 "use client";
 
-import { PostList } from "@/_components";
 import Image from "next/image";
-import { useGetMyPostList } from "../_states";
+import Link from "next/link";
+import { useGetMyPostList, usePostTypeStore } from "../_states";
 import { ProfilePageProps } from "../page.types";
 import { isNotEmptyArray } from "@/_utils";
+import { PostItem } from "@/_components";
 
 const ProfilePostListPage = ({ params }: ProfilePageProps) => {
   const {
@@ -13,6 +14,12 @@ const ProfilePostListPage = ({ params }: ProfilePageProps) => {
     isError,
     isSuccess,
   } = useGetMyPostList(params.accountname);
+  const { postType, setPostListType, setPostAlbumType } = usePostTypeStore();
+
+  const LIST_LAYOUT =
+    postType === "list"
+      ? "flex flex-col gap-y-[3rem] py-[1.6rem] px-[2rem]"
+      : "grid grid-cols-3 gap-[0.8rem] p-[1.6rem]";
 
   if (isLoading) return null;
   if (isError) return null;
@@ -24,18 +31,22 @@ const ProfilePostListPage = ({ params }: ProfilePageProps) => {
             <hr className="border-y-[0.3rem] border-grey-100" />
             <section>
               <div className="flex justify-end gap-x-[1.6rem] px-[1.6rem] py-[1rem] border-b-[0.05rem] border-solid border-grey-300">
-                <button type="button">
+                <button type="button" onClick={setPostListType}>
                   <Image
-                    src="/icon-post-list-on.png"
+                    src={`/icon-post-list-${
+                      postType === "list" ? "on" : "off"
+                    }.png`}
                     alt="post list"
                     width={26}
                     height={26}
                     priority
                   />
                 </button>
-                <button type="button">
+                <button type="button" onClick={setPostAlbumType}>
                   <Image
-                    src="/icon-post-album-off.png"
+                    src={`/icon-post-album-${
+                      postType === "album" ? "on" : "off"
+                    }.png`}
                     alt="post album"
                     width={26}
                     height={26}
@@ -43,7 +54,15 @@ const ProfilePostListPage = ({ params }: ProfilePageProps) => {
                   />
                 </button>
               </div>
-              <PostList page="profile" postType="default" list={postList} />
+              <ul className={LIST_LAYOUT}>
+                {postList.map((post) => (
+                  <li key={post.id}>
+                    <Link href={`/post/${post.id}`}>
+                      <PostItem type={postType} {...post} />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </section>
           </>
         )}
