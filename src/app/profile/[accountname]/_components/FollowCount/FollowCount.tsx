@@ -1,6 +1,6 @@
-import { FollowProps } from "./Follow.types";
+import { FollowCountProps } from "./FollowCount.types";
 
-export const Follow = ({ type, count }: FollowProps) => {
+export const FollowCount = ({ type, count }: FollowCountProps) => {
   const VARIANT_TO_TYPE = type === "follower" ? "followers" : "followings";
 
   return (

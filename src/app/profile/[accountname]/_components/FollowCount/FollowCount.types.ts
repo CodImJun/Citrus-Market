@@ -1,4 +1,4 @@
-export interface FollowProps {
+export interface FollowCountProps {
   type: "follower" | "following";
   count: number;
 }
