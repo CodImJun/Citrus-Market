@@ -24,7 +24,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
 
 const Layout = ({ children }: React.PropsWithChildren) => {
   return (
-    <div className="max-w-[39rem] h-full m-auto border-x-[0.1rem] border-solid border-grey-300">
+    <div className="relative box-content w-[39rem] max-w-[39rem] h-full m-auto border-x-[0.1rem] border-solid border-grey-300">
       {children}
     </div>
   );
