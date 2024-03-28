@@ -1,5 +1,5 @@
 import { PostType } from "@/_types";
 
 export type PostItemProps = {
-  type: "default" | "album";
+  type: "list" | "album";
 } & PostType;

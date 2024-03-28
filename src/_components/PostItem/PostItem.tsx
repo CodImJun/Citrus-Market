@@ -5,7 +5,7 @@ import { createImageURL } from "@/_utils";
 import { PostItemProps } from "./PostItem.types";
 
 export const PostItem = ({ type, ...props }: PostItemProps) => {
-  return type === "default" ? (
+  return type === "list" ? (
     <DefaultPost {...props} />
   ) : (
     <AlbumPost {...props} />
@@ -118,6 +118,16 @@ const AlbumPost = (props: PostType) => {
         fill
         sizes="100%"
       />
+      {imgSrcArray.length > 1 && (
+        <Image
+          src="/icon-img-layers.png"
+          alt="multiple images"
+          width={20}
+          height={20}
+          priority
+          className="absolute top-[0.6rem] right-[0.6rem]"
+        />
+      )}
     </article>
   );
 };
