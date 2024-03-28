@@ -12,7 +12,11 @@ export const ProfileInfoSection = ({
   return (
     <>
       <div className="flex gap-x-[3.8rem] items-center mb-[1.6rem]">
-        <FollowCount type="follower" count={followerCount} />
+        <FollowCount
+          type="follower"
+          count={followerCount}
+          accountname={accountname}
+        />
         <ImageWithFallback
           src={image}
           alt="profile image"
@@ -22,7 +26,11 @@ export const ProfileInfoSection = ({
           fallbackSrc="/basic-profile-img.png"
           priority
         />
-        <FollowCount type="following" count={followingCount} />
+        <FollowCount
+          type="following"
+          count={followingCount}
+          accountname={accountname}
+        />
       </div>
       <p className="text-16-700-20 text-black">{username}</p>
       <p className="text-12-400-14 text-grey-700 mt-[0.6rem]">@{accountname}</p>
