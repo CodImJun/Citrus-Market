@@ -39,7 +39,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       );
 
     return (
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col gap-y-2 w-full">
         <label
           htmlFor={labelName}
           className="text-sm font-medium text-gray-700"

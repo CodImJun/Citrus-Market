@@ -10,7 +10,10 @@ import { immer } from "zustand/middleware/immer";
 
 type UseAuthStoreState = {
   isLoggedIn: boolean;
-  loginInfo: Pick<UserType, "_id" | "accountname" | "username">;
+  loginInfo: Pick<
+    UserType,
+    "_id" | "image" | "accountname" | "username" | "intro"
+  >;
 };
 
 type UseAuthStoreAction = {
@@ -22,8 +25,10 @@ const initialState = {
   isLoggedIn: Boolean(localStorage.getItem(ACCESS_TOKEN_KEY)),
   loginInfo: {
     _id: "",
+    image: "",
     accountname: "",
     username: "",
+    intro: "",
   },
 };
 
@@ -37,8 +42,10 @@ export const useAuthStore = create<UseAuthStoreState & UseAuthStoreAction>()(
             state.isLoggedIn = true;
             state.loginInfo = {
               _id: data.user._id,
+              image: data.user.image,
               accountname: data.user.accountname,
               username: data.user.username,
+              intro: data.user.intro,
             };
             localStorage.setItem(ACCESS_TOKEN_KEY, data.user.token);
             localStorage.setItem(REFRESH_TOKEN_KEY, data.user.refreshToken);

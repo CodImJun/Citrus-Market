@@ -6,7 +6,10 @@ export type LoginRequest = {
 };
 export type LoginResponse =
   | {
-      user: Pick<UserType, "_id" | "username" | "accountname" | "image"> & {
+      user: Pick<
+        UserType,
+        "_id" | "username" | "accountname" | "image" | "intro"
+      > & {
         email: string;
         token: string;
         refreshToken: string;
