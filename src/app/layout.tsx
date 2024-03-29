@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Provider } from "./provider";
+import { GlobalLayout } from "./GlobalLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,17 +16,9 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
     <html lang="ko">
       <body className={inter.className}>
         <Provider>
-          <Layout>{children}</Layout>
+          <GlobalLayout>{children}</GlobalLayout>
         </Provider>
       </body>
     </html>
   );
 }
-
-const Layout = ({ children }: React.PropsWithChildren) => {
-  return (
-    <div className="relative box-content w-[39rem] max-w-[39rem] h-full m-auto border-x-[0.1rem] border-solid border-grey-300">
-      {children}
-    </div>
-  );
-};
