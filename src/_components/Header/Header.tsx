@@ -47,7 +47,7 @@ const HeaderLayout = ({
 }: React.PropsWithChildren & React.HTMLAttributes<HTMLHeadElement>) => {
   return (
     <header
-      className="fixed flex flex-row bg-white w-full max-w-[39rem] h-[4.8rem] items-center justify-between px-[1.6rem] border-b-[0.05rem] border-solid border-grey-300"
+      className="fixed flex flex-row bg-white w-full max-w-[39rem] h-[4.8rem] items-center justify-between px-[1.6rem] border-b-[0.05rem] border-solid border-grey-300 z-10"
       {...rest}
     >
       {children}

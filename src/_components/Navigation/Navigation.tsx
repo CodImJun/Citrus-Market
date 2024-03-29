@@ -14,7 +14,7 @@ export const Navigation = () => {
   return (
     <nav
       aria-label="바로가기 네비게이션"
-      className="fixed bottom-0 w-full max-w-[39rem] bg-white border-t-[0.1rem] border-solid border-grey-300"
+      className="fixed bottom-0 w-full max-w-[39rem] bg-white border-t-[0.1rem] border-solid border-grey-300 z-10"
     >
       <ul className="flex flex-row items-center justify-between gap-x-[1.4rem] w-full h-[6rem] px-[0.6rem]">
         {NAV_ITEMS.map(
