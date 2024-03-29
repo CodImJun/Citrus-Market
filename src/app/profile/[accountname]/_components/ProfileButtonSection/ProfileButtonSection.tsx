@@ -13,6 +13,7 @@ export const ProfileButtonSection = ({
 }: ProfileButtonSectionProps) => {
   const router = useRouter();
   const loginID = useAuthStore((state) => state.loginInfo._id);
+  const handleLogOut = useAuthStore((state) => state.handleLogOut);
 
   return (
     <div className="flex gap-x-[1rem] mt-[2.4rem]">
@@ -20,19 +21,14 @@ export const ProfileButtonSection = ({
         <>
           <Button
             size="M"
-            w="w-[12rem]"
-            active={true}
-            onClick={() => router.push("/edit/profile")}
-          >
-            프로필 수정
-          </Button>
-          <Button
-            size="M"
             w="w-[10rem]"
             active={true}
             onClick={() => router.push("/upload/post")}
           >
             상품 등록
+          </Button>
+          <Button size="M" w="w-[10rem]" active={true} onClick={handleLogOut}>
+            로그아웃
           </Button>
         </>
       ) : (

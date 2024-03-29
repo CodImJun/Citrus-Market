@@ -52,11 +52,13 @@ export const useAuthStore = create<UseAuthStoreState & UseAuthStoreAction>()(
           }
         });
       },
-      handleLogOut: () => {
-        set(initialState);
-        localStorage.removeItem(ACCESS_TOKEN_KEY);
-        localStorage.removeItem(REFRESH_TOKEN_KEY);
-      },
+      handleLogOut: () =>
+        set((state) => {
+          state.isLoggedIn = initialState.isLoggedIn;
+          state.loginInfo = initialState.loginInfo;
+          localStorage.removeItem(ACCESS_TOKEN_KEY);
+          localStorage.removeItem(REFRESH_TOKEN_KEY);
+        }),
     })),
     {
       name: "CITRUS_AUTH_STORE",
