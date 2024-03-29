@@ -6,8 +6,9 @@ export const NAV_ITEMS = [
     label: "홈",
   },
   {
-    path: "/chat",
+    path: "/chat/list",
     icon: "/icon-message-circle.png",
+    iconActive: "/icon-message-circle-fill.png",
     label: "채팅",
   },
   {
