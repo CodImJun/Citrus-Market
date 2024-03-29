@@ -4,7 +4,9 @@ const ProfilePageLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <>
       <Header />
-      <main className="flex flex-col pt-[4.8rem] pb-[6rem]">{children}</main>
+      <main className="flex flex-col pt-[4.8rem] pb-[6rem] min-h-full">
+        {children}
+      </main>
       <Navigation />
     </>
   );
