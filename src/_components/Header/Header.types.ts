@@ -8,3 +8,7 @@ export interface UploadHeaderProps {
 export interface ChatHeaderProps {
   chatName: string;
 }
+
+export interface FollowHeaderProps {
+  pathname: string;
+}

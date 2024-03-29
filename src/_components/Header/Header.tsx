@@ -6,7 +6,11 @@ import { BackIcon, MoreIcon, SearchIcon } from "../Icon";
 import { SearchBar } from "../SearchBar";
 import { Button } from "../Button";
 
-import { ChatHeaderProps, UploadHeaderProps } from "./Header.types";
+import {
+  ChatHeaderProps,
+  FollowHeaderProps,
+  UploadHeaderProps,
+} from "./Header.types";
 
 export const Header = (props: {
   isValid?: boolean;
@@ -32,12 +36,20 @@ export const Header = (props: {
       );
     case pathname === "/chat":
       return <ChatHeader chatName={CHAT_NAME} />;
+    case pathname.includes("follow"):
+      return <FollowHeader pathname={pathname} />;
   }
 };
 
-const HeaderLayout = ({ children }: React.PropsWithChildren) => {
+const HeaderLayout = ({
+  children,
+  ...rest
+}: React.PropsWithChildren & React.HTMLAttributes<HTMLHeadElement>) => {
   return (
-    <header className="fixed flex flex-row bg-white w-full max-w-[39rem] h-[4.8rem] items-center justify-between px-[1.6rem] border-b-[0.05rem] border-solid border-grey-300">
+    <header
+      className="fixed flex flex-row bg-white w-full max-w-[39rem] h-[4.8rem] items-center justify-between px-[1.6rem] border-b-[0.05rem] border-solid border-grey-300"
+      {...rest}
+    >
       {children}
     </header>
   );
@@ -95,5 +107,14 @@ const ChatHeader = ({ chatName }: ChatHeaderProps) => {
       </div>
       <MoreIcon />
     </HeaderLayout>
+  );
+};
+
+const FollowHeader = ({ pathname }: FollowHeaderProps) => {
+  return (
+    <header className="fixed flex gap-x-[0.8rem] bg-white w-full max-w-[39rem] h-[4.8rem] items-center px-[1.6rem] border-b-[0.05rem] border-solid border-grey-300 text-black text-14-400-17.5">
+      <BackIcon />
+      {pathname.includes("follower") ? "Follower" : "Following"}
+    </header>
   );
 };
