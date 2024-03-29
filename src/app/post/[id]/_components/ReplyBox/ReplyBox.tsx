@@ -1,20 +1,27 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { ReplyBoxProps } from "./ReplyBox.types";
+import { ImageWithFallback } from "@/_components";
+import { useCreateCommentMutate } from "../../_states";
 
 // TODO: Fix UseInput
-export const ReplyBox = ({ profileImage = "" }: ReplyBoxProps) => {
+export const ReplyBox = ({ profileImage, postId }: ReplyBoxProps) => {
   const [reply, setReply] = useState("");
+  const { mutate } = useCreateCommentMutate();
 
   const handleChangeReply = (e: React.ChangeEvent<HTMLInputElement>) =>
     setReply(e.target.value);
 
+  const handleSubmitComment = () => {
+    mutate({ post_id: postId, content: reply });
+  };
+
   return (
-    <footer className="fixed bottom-0 w-full h-[6rem] flex gap-x-[1.6rem] items-center justify-between px-[1.6rem] py-[1.2rem] border-grey-300 border-solid border-t-[0.05rem] bg-white">
-      <Image
-        src={profileImage}
+    <footer className="fixed bottom-0 w-full max-w-[39rem] h-[6rem] flex gap-x-[1.6rem] items-center justify-between px-[1.6rem] py-[1.2rem] border-grey-300 border-solid border-t-[0.05rem] bg-white">
+      <ImageWithFallback
+        src={process.env.NEXT_PUBLIC_API_URL + "/" + profileImage}
+        fallbackSrc="/basic-profile-img.png"
         alt="profile image"
         width={36}
         height={36}
@@ -34,6 +41,7 @@ export const ReplyBox = ({ profileImage = "" }: ReplyBoxProps) => {
           reply ? "text-primary" : "text-grey-500"
         }`}
         disabled={!reply}
+        onClick={handleSubmitComment}
       >
         게시
       </button>

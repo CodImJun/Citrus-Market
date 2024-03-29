@@ -1,4 +1,4 @@
-import { PaginationType, PostType } from "@/_types";
+import { PaginationType, PostType, UserType } from "@/_types";
 
 // 5.1
 export type CreatePostRequest = {
@@ -21,4 +21,19 @@ export type GetMyPostListRequest = {
 };
 export type GetMyPostListResponse = {
   post: PostType[];
+};
+
+// 5.4
+export type GetPostDetailRequest = {
+  post_id: string;
+};
+export type GetPostDetailResponse = {
+  post: PostType & {
+    comments: {
+      id: string;
+      content: string;
+      createdAt: string;
+      author: UserType;
+    }[];
+  };
 };

@@ -3,4 +3,5 @@ export const queryKeys = {
   search: "SEARCH",
   product: "PRODUCT",
   profile: "PROFILE",
+  comment: "COMMENT",
 };

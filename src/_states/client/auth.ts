@@ -54,7 +54,7 @@ export const useAuthStore = create<UseAuthStoreState & UseAuthStoreAction>()(
       },
       handleLogOut: () =>
         set((state) => {
-          state.isLoggedIn = initialState.isLoggedIn;
+          state.isLoggedIn = false;
           state.loginInfo = initialState.loginInfo;
           localStorage.removeItem(ACCESS_TOKEN_KEY);
           localStorage.removeItem(REFRESH_TOKEN_KEY);
