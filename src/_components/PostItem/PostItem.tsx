@@ -4,6 +4,7 @@ import { PostType } from "@/_types";
 import { createImageURL } from "@/_utils";
 import { PostItemProps } from "./PostItem.types";
 
+// TODO: Add Delete / Edit Function
 export const PostItem = ({ type, ...props }: PostItemProps) => {
   return type === "list" ? (
     <DefaultPost {...props} />
