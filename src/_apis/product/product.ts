@@ -7,9 +7,13 @@ import {
 } from "./product.types";
 
 export const ProductAPI = {
-  getProductList: async ({ accountname }: GetProductListRequest) => {
+  getProductList: async ({
+    accountname,
+    limit = 5,
+    skip = 0,
+  }: GetProductListRequest) => {
     const { data } = await instance.get<GetProductListResponse>(
-      `/product/${accountname}`
+      `/product/${accountname}?limit={${limit}&skip=${skip}}`
     );
     return data.product;
   },

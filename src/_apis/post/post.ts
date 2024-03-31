@@ -19,7 +19,6 @@ export const PostAPI = {
         image,
       },
     });
-    console.log(data);
     return data;
   },
   // 5.2

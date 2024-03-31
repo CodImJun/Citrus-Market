@@ -1,6 +1,6 @@
-import { ProductType } from "@/_types";
+import { PaginationType, ProductType } from "@/_types";
 
-export type GetProductListRequest = {
+export type GetProductListRequest = PaginationType & {
   accountname: string;
 };
 export type GetProductListResponse = {
