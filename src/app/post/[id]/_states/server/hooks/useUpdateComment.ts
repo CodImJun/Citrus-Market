@@ -13,7 +13,7 @@ export const useUpdateComment = () => {
     );
 
     if (currentComments) {
-      const updatedComments = [...currentComments, newComment];
+      const updatedComments = [newComment, ...currentComments];
 
       queryClient.setQueryData(
         queryKeys.comment.getCommentList({ post_id }),
