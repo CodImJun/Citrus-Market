@@ -1,4 +1,5 @@
 import { PaginationType, PostType, UserType } from "@/_types";
+import { CommentType } from "@/_types/comment";
 
 // 5.1
 export type CreatePostRequest = {
@@ -29,11 +30,6 @@ export type GetPostDetailRequest = {
 };
 export type GetPostDetailResponse = {
   post: PostType & {
-    comments: {
-      id: string;
-      content: string;
-      createdAt: string;
-      author: UserType;
-    }[];
+    comments: CommentType[];
   };
 };
