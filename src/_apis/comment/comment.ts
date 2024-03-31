@@ -19,7 +19,7 @@ export const CommentAPI = {
         },
       }
     );
-    return data;
+    return data.comment;
   },
   // 7.2
   getCommentList: async ({ post_id, limit, skip }: GetCommentListRequest) => {

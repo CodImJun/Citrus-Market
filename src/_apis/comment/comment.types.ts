@@ -7,10 +7,7 @@ export type CreateCommentRequest = {
   content: string;
 };
 export type CreateCommentResponse = {
-  id: string;
-  content: string;
-  createdAt: string;
-  author: UserType;
+  comment: CommentType;
 };
 
 // 7.2
