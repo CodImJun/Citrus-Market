@@ -7,7 +7,10 @@ export const useGetFollowList = (
   accountname: string
 ) => {
   return useQuery({
-    queryKey: [queryKeys.profile, accountname],
+    queryKey:
+      type === "follower"
+        ? queryKeys.profile.getFollowerList({ accountname })
+        : queryKeys.profile.getFollowingList({ accountname }),
     queryFn: () => {
       if (type === "follower")
         return ProfileAPI.getFollowerList({ accountname });

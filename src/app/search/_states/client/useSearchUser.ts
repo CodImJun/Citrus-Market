@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useSearchUser = (keyword: string) => {
   return useQuery({
-    queryKey: [queryKeys.search, keyword],
+    queryKey: queryKeys.search.searchUser({ keyword }),
     queryFn: () => SearchAPI.searchUser({ keyword }),
     enabled: !isEmptyString(keyword),
     staleTime: 6 * 10 * 1000,

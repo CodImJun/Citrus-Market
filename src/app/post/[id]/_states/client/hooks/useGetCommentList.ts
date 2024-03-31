@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useGetCommentList = (post_id: string) => {
   return useQuery({
-    queryKey: [queryKeys.comment, post_id],
+    queryKey: queryKeys.comment.getCommentList({ post_id }),
     queryFn: () => CommentAPI.getCommentList({ post_id }),
   });
 };

@@ -1,5 +1,5 @@
 import { PostAPI } from "@/_apis";
-import { queryKeys } from "@/_states/server";
+import { queryKeys } from "@/_states";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetFollowingPostList = () => {
@@ -12,7 +12,7 @@ export const useGetFollowingPostList = () => {
   // });
 
   return useQuery({
-    queryKey: [queryKeys.post],
+    queryKey: queryKeys.post.getFollowingPostList(),
     queryFn: () => PostAPI.getFollowingPostList(),
   });
 };

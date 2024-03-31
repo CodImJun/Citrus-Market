@@ -4,16 +4,16 @@ import { useQueries } from "@tanstack/react-query";
 
 export const useProfileQueries = (accountname: string) => {
   const getProfileQueryOptions = {
-    queryKey: [queryKeys.profile, accountname],
+    queryKey: queryKeys.profile.getPersonalProfile({ accountname }),
     queryFn: () => ProfileAPI.getPersonalProfile({ accountname }),
   };
 
   const getProductListQueryOptions = {
-    queryKey: [queryKeys.product, accountname],
+    queryKey: queryKeys.product.getProductList({ accountname }),
     queryFn: () => ProductAPI.getProductList({ accountname }),
   };
   const getPostListQueryOptions = {
-    queryKey: [queryKeys.post, accountname],
+    queryKey: queryKeys.post.getMyPostList({ accountname }),
     queryFn: () => PostAPI.getMyPostList({ accountname }),
   };
 
