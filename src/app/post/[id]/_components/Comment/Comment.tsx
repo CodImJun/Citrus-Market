@@ -2,7 +2,7 @@ import Image from "next/image";
 import { CommentProps } from "./Comment.types";
 import { ImageWithFallback } from "@/_components";
 import { useAuthStore } from "@/_states";
-import { useDeleteComment } from "../../_states/server/hooks/useDeleteComment";
+import { useDeleteCommentMutate } from "../../_states";
 
 export const Comment = ({
   postId,
@@ -13,7 +13,7 @@ export const Comment = ({
   content,
   createdAt,
 }: CommentProps) => {
-  const { mutate } = useDeleteComment();
+  const { mutate } = useDeleteCommentMutate();
   const loginID = useAuthStore((state) => state.loginInfo._id);
 
   const handleDeleteComment = () => {
