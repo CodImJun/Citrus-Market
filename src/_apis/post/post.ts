@@ -23,11 +23,17 @@ export const PostAPI = {
   },
   // 5.2
   getFollowingPostList: async ({
-    limit = 5,
-    skip = 0,
+    limit,
+    skip,
   }: GetFollowingPostListRequest = {}) => {
     const { data } = await instance.get<GetFollowingPostListResponse>(
-      `/post/feed/?limit=${limit}&skip=${skip}`
+      `/post/feed`,
+      {
+        params: {
+          limit,
+          skip,
+        },
+      }
     );
     return data.posts;
   },

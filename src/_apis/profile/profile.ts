@@ -41,7 +41,13 @@ export const ProfileAPI = {
     skip,
   }: GetFollowingListRequest) => {
     const { data } = await instance.get<GetFollowingListResponse>(
-      `/profile/${accountname}/following?limit=${limit}&skip=${skip}`
+      `/profile/${accountname}/following`,
+      {
+        params: {
+          limit,
+          skip,
+        },
+      }
     );
     return data;
   },
@@ -52,7 +58,13 @@ export const ProfileAPI = {
     skip,
   }: GetFollowerListRequest) => {
     const { data } = await instance.get<GetFollowerListResponse>(
-      `/profile/${accountname}/follower?limit=${limit}&skip=${skip}`
+      `/profile/${accountname}/follower`,
+      {
+        params: {
+          limit,
+          skip,
+        },
+      }
     );
     return data;
   },

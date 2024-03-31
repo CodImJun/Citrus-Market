@@ -24,7 +24,13 @@ export const CommentAPI = {
   // 7.2
   getCommentList: async ({ post_id, limit, skip }: GetCommentListRequest) => {
     const { data } = await instance.get<GetCommentListResponse>(
-      `/post/${post_id}/comments?limit=${limit}&skip=${skip}`
+      `/post/${post_id}/comments`,
+      {
+        params: {
+          limit,
+          skip,
+        },
+      }
     );
     return data.comments;
   },

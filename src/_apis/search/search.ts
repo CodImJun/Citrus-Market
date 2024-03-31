@@ -4,7 +4,12 @@ import { SearchUserRequest, SearchUserResponse } from "./search.types";
 export const SearchAPI = {
   searchUser: async ({ keyword }: SearchUserRequest) => {
     const { data } = await instance.get<SearchUserResponse>(
-      `/user/searchuser/?keyword=${keyword}`
+      "/user/searchuser",
+      {
+        params: {
+          keyword,
+        },
+      }
     );
     return data;
   },

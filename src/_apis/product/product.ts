@@ -9,11 +9,17 @@ import {
 export const ProductAPI = {
   getProductList: async ({
     accountname,
-    limit = 5,
-    skip = 0,
+    limit,
+    skip,
   }: GetProductListRequest) => {
     const { data } = await instance.get<GetProductListResponse>(
-      `/product/${accountname}?limit={${limit}&skip=${skip}}`
+      `/product/${accountname}`,
+      {
+        params: {
+          limit,
+          skip,
+        },
+      }
     );
     return data.product;
   },
