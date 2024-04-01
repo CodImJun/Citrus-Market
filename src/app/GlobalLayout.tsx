@@ -1,5 +1,6 @@
 "use client";
 
+import { Modal } from "@/_components";
 import { useAuthStore } from "@/_states";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -18,8 +19,12 @@ export const GlobalLayout = ({ children }: React.PropsWithChildren) => {
   }, [isLoggedIn, pathname, router]);
 
   return (
-    <div className="relative box-content w-[39rem] max-w-[39rem] h-full m-auto border-x-[0.1rem] border-solid border-grey-300">
+    <div
+      id="root"
+      className="relative box-content w-[39rem] max-w-[39rem] h-full m-auto border-x-[0.1rem] border-solid border-grey-300"
+    >
       {children}
+      <Modal />
     </div>
   );
 };

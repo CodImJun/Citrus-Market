@@ -5,6 +5,7 @@ export * from "./Icon";
 export * from "./ImageUploadButton";
 export * from "./ImageWithFallback";
 export * from "./MainLayout";
+export * from "./Modal";
 export * from "./Navigation";
 export * from "./PostItem";
 export * from "./PreviewImageUpload";
