@@ -3,6 +3,7 @@ import { ImageWithFallback } from "../ImageWithFallback";
 import { PostType } from "@/_types";
 import { createImageURL } from "@/_utils";
 import { PostItemProps } from "./PostItem.types";
+import { format } from "date-fns/format";
 
 // TODO: Add Delete / Edit Function
 export const PostItem = ({ type, ...props }: PostItemProps) => {
@@ -54,26 +55,26 @@ const DefaultPost = (props: PostType) => {
       </div>
       <div className="overflow-x-scroll">
         <ul className="flex gap-[0.8rem] min-w-max">
-          {imgSrcArray.map((img, idx) => {
-            const isSingle = imgSrcArray.length === 1;
-            const SIZE = isSingle
-              ? "w-full h-[22.8rem]"
-              : "w-[16.8rem] h-[12.6rem]";
-
-            return (
-              <li key={img + idx} className={`relative ${SIZE}`}>
-                <ImageWithFallback
-                  src={createImageURL(img)}
-                  fallbackSrc="/icon-img.png"
-                  alt="content image"
-                  fill
-                  sizes="100%"
-                  priority
-                  className="rounded-[1rem]"
-                />
-              </li>
-            );
-          })}
+          {imgSrcArray.map((img, idx) => (
+            <li
+              key={img + idx}
+              className={`relative ${
+                imgSrcArray.length === 1
+                  ? "w-full h-[22.8rem]"
+                  : "w-[16.8rem] h-[12.6rem]"
+              }`}
+            >
+              <ImageWithFallback
+                src={createImageURL(img)}
+                fallbackSrc="/icon-img.png"
+                alt="content image"
+                fill
+                sizes="100%"
+                priority
+                className="rounded-[1rem]"
+              />
+            </li>
+          ))}
         </ul>
       </div>
       <div className="flex gap-x-[1.6rem] text-12-400-12 text-grey-700 mt-[-0.4rem]">
@@ -99,9 +100,7 @@ const DefaultPost = (props: PostType) => {
         </div>
       </div>
       <div className="text-10-400-12 text-grey-700">
-        {`${createdAt.getFullYear()}년 ${
-          createdAt.getMonth() + 1
-        }월 ${createdAt.getDate()}일`}
+        {format(createdAt, "yyyy년 MM월 dd일")}
       </div>
     </article>
   );
