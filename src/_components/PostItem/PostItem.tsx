@@ -4,6 +4,7 @@ import { PostType } from "@/_types";
 import { createImageURL } from "@/_utils";
 import { PostItemProps } from "./PostItem.types";
 import { format } from "date-fns/format";
+import { useLiked } from "@/_hooks";
 
 // TODO: Add Delete / Edit Function
 export const PostItem = ({ type, ...props }: PostItemProps) => {
@@ -15,6 +16,7 @@ export const PostItem = ({ type, ...props }: PostItemProps) => {
 };
 
 const DefaultPost = (props: PostType) => {
+  const { mutate: handleLiked } = useLiked();
   const createdAt = new Date(props.createdAt);
   const imgSrcArray = props.image.split(",").map((src) => src.trim());
 
@@ -78,9 +80,15 @@ const DefaultPost = (props: PostType) => {
         </ul>
       </div>
       <div className="flex gap-x-[1.6rem] text-12-400-12 text-grey-700 mt-[-0.4rem]">
-        <div className="flex gap-x-[0.6rem] items-center">
+        <div
+          className="flex gap-x-[0.6rem] items-center"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleLiked({ post_id: props.id, liked: props.hearted });
+          }}
+        >
           <Image
-            src="/icon-heart.png"
+            src={!props.hearted ? "/icon-heart.png" : "/icon-heart-active.png"}
             alt="hearted"
             width={20}
             height={20}
