@@ -1,5 +1,5 @@
-import { useGetCommentList } from "../../_states/client/hooks/useGetCommentList";
-import { Comment } from "../Comment/Comment";
+import { useGetCommentList } from "../../_states";
+import { Comment } from "../Comment";
 import { CommentListProps } from "./CommentList.types";
 
 export const CommentList = ({ post_id }: CommentListProps) => {
