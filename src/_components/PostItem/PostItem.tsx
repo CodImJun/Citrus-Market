@@ -5,8 +5,10 @@ import { createImageURL } from "@/_utils";
 import { PostItemProps } from "./PostItem.types";
 import { format } from "date-fns/format";
 import { useLiked } from "@/_hooks";
+import { useAuthStore, useModalStore } from "@/_states";
+import { usePathname, useRouter } from "next/navigation";
+import { usePostDelete } from "@/_hooks/usePostDelete";
 
-// TODO: Add Delete / Edit Function
 export const PostItem = ({ type, ...props }: PostItemProps) => {
   return type === "list" ? (
     <DefaultPost {...props} />
@@ -16,7 +18,12 @@ export const PostItem = ({ type, ...props }: PostItemProps) => {
 };
 
 const DefaultPost = (props: PostType) => {
+  const router = useRouter();
+  const pathname = usePathname();
   const { mutate: handleLiked } = useLiked();
+  const { openModal, openConfirm } = useModalStore();
+  const { mutate: handleDeletePost } = usePostDelete({ post_id: props.id });
+  const loginID = useAuthStore((state) => state.loginInfo._id);
   const createdAt = new Date(props.createdAt);
   const imgSrcArray = props.image.split(",").map((src) => src.trim());
 
@@ -39,18 +46,36 @@ const DefaultPost = (props: PostType) => {
         <p className="text-12-400-14 text-grey-700">
           @{props.author.accountname}
         </p>
-        <button
-          type="button"
-          className="absolute w-[1.8rem] h-[1.8rem] right-0 top-0"
-        >
-          <Image
-            src="/s-icon-more-vertical.png"
-            alt="feed more button"
-            fill
-            sizes="100%"
-            priority
-          />
-        </button>
+        {loginID === props.author._id && pathname.includes("/post/") && (
+          <button
+            type="button"
+            className="absolute w-[1.8rem] h-[1.8rem] right-0 top-0"
+            onClick={(e) => {
+              e.stopPropagation();
+              openModal([
+                {
+                  text: "수정",
+                  onClick: () => router.push(`/post/${props.id}/update`),
+                },
+                {
+                  text: "삭제",
+                  onClick: () =>
+                    openConfirm("게시글을 삭제 하시겠습니까?", () =>
+                      handleDeletePost()
+                    ),
+                },
+              ]);
+            }}
+          >
+            <Image
+              src="/s-icon-more-vertical.png"
+              alt="feed more button"
+              fill
+              sizes="100%"
+              priority
+            />
+          </button>
+        )}
       </div>
       <div className="overflow-hidden">
         <p className="text-14-400-17.5 text-black">{props.content}</p>
@@ -80,19 +105,17 @@ const DefaultPost = (props: PostType) => {
         </ul>
       </div>
       <div className="flex gap-x-[1.6rem] text-12-400-12 text-grey-700 mt-[-0.4rem]">
-        <div
-          className="flex gap-x-[0.6rem] items-center"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleLiked({ post_id: props.id, liked: props.hearted });
-          }}
-        >
+        <div className="flex gap-x-[0.6rem] items-center cursor-pointer">
           <Image
             src={!props.hearted ? "/icon-heart.png" : "/icon-heart-active.png"}
             alt="hearted"
             width={20}
             height={20}
             priority
+            onClick={(e) => {
+              e.stopPropagation();
+              handleLiked({ post_id: props.id, liked: props.hearted });
+            }}
           />
           {props.heartCount}
         </div>

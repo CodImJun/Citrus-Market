@@ -33,3 +33,11 @@ export type GetPostDetailResponse = {
     comments: CommentType[];
   };
 };
+
+// 5.6
+export type DeletePostRequest = {
+  post_id: string;
+};
+export type DeletePostResponse = {
+  message: string;
+};

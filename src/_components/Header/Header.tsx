@@ -59,7 +59,7 @@ const BasicHeader = () => {
   return (
     <HeaderLayout>
       <BackIcon />
-      <MoreIcon />
+      {/* <MoreIcon /> */}
     </HeaderLayout>
   );
 };

@@ -2,6 +2,8 @@ import { instance } from "@/_states/server";
 import {
   CreatePostRequest,
   CreatePostResponse,
+  DeletePostRequest,
+  DeletePostResponse,
   GetFollowingPostListRequest,
   GetFollowingPostListResponse,
   GetMyPostListRequest,
@@ -50,5 +52,12 @@ export const PostAPI = {
       `/post/${post_id}`
     );
     return data.post;
+  },
+  // 5.6
+  deletePost: async ({ post_id }: DeletePostRequest) => {
+    const { data } = await instance.delete<DeletePostResponse>(
+      `/post/${post_id}`
+    );
+    return data;
   },
 };
