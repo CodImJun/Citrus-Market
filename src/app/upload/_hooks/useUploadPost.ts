@@ -1,8 +1,9 @@
+"use client";
+
 import { useRegisterFormField } from "@/app/(auth)/_hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { UPLOAD_SCHEMA } from "../_constants";
-import { instance } from "@/_states";
 import { ImageAPI } from "@/_apis";
 import { useUploadPostMutate } from "../_states/server/useUploadPostMutate";
 

@@ -1,10 +1,9 @@
 "use client";
 
 import { Header, ImageUploadButton } from "@/_components";
-import { useState } from "react";
 import { useUploadPost } from "../_hooks/useUploadPost";
-import { validateImageInput } from "@/_utils";
 import { ImagePreviewList, PostContentTextarea } from "../_component";
+import { useUploadImage } from "@/_hooks";
 
 const UploadPostPage = () => {
   const {
@@ -14,38 +13,9 @@ const UploadPostPage = () => {
     contentRegister,
     handleUploadPost,
   } = useUploadPost();
-  const [images, setImages] = useState<{ file: File; imageUrl: string }[]>([]);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
-    if (!selectedFiles) return;
-
-    const filesArray = Array.from(selectedFiles);
-    const validation = validateImageInput(filesArray);
-
-    if (!validation.isValid) {
-      alert(validation.errorMessage);
-      return;
-    }
-
-    const newImages = filesArray.map((file) => ({
-      file,
-      imageUrl: URL.createObjectURL(file),
-    }));
-
-    setImages(newImages);
-    setValue("image", filesArray, { shouldValidate: true });
-  };
-
-  const handleRemoveImage = (index: number) => {
-    const updatedImages = images.filter((_, i) => i !== index);
-    setImages(updatedImages);
-    setValue(
-      "image",
-      updatedImages.map(({ file }) => file),
-      { shouldValidate: true }
-    );
-  };
+  const { images, handleChangeImage, handleRemoveImage } = useUploadImage({
+    setValue,
+  });
 
   return (
     <>
@@ -63,7 +33,7 @@ const UploadPostPage = () => {
         <ImageUploadButton
           multiple={true}
           position="right-[1.6rem] bottom-[1.6rem]"
-          {...Object.assign(imageRegister, { onChange: handleFileChange })}
+          {...Object.assign(imageRegister, { onChange: handleChangeImage })}
         />
       </main>
     </>

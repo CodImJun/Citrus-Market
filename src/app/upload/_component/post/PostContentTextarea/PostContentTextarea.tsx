@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import { PostContentTextareaProps } from "./PostContentTextarea.types";
 import { resizeElementByInput } from "@/app/upload/_utils";
