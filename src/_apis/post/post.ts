@@ -10,6 +10,8 @@ import {
   GetMyPostListResponse,
   GetPostDetailRequest,
   GetPostDetailResponse,
+  UpdatePostRequest,
+  UpdatePostResponse,
 } from "./post.types";
 
 export const PostAPI = {
@@ -52,6 +54,19 @@ export const PostAPI = {
       `/post/${post_id}`
     );
     return data.post;
+  },
+  // 5.5
+  updatePost: async ({ post_id, image, content }: UpdatePostRequest) => {
+    const { data } = await instance.put<UpdatePostResponse>(
+      `/post/${post_id}`,
+      {
+        post: {
+          content,
+          image,
+        },
+      }
+    );
+    return data;
   },
   // 5.6
   deletePost: async ({ post_id }: DeletePostRequest) => {

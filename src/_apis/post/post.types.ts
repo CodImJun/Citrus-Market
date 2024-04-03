@@ -34,6 +34,16 @@ export type GetPostDetailResponse = {
   };
 };
 
+// 5.5
+export type UpdatePostRequest = {
+  post_id: string;
+  image: string;
+  content: string;
+};
+export type UpdatePostResponse = {
+  post: UserType[];
+};
+
 // 5.6
 export type DeletePostRequest = {
   post_id: string;
