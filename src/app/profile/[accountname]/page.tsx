@@ -30,7 +30,6 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
         <UserProfileSection
           profileInfo={getProfileQuery.data}
           params={params}
-          refetch={getProfileQuery.refetch}
         />
         <UserProductSection productList={getProductQuery.data} />
         <UserPostSection postList={getPostQuery.data} />

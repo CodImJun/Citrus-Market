@@ -5,7 +5,6 @@ import { UserProfileSectionProps } from "./UserProfileSection.types";
 export const UserProfileSection = ({
   profileInfo,
   params,
-  refetch,
 }: UserProfileSectionProps) => {
   return (
     <section className="flex flex-col items-center py-[2.8rem]">
@@ -21,7 +20,6 @@ export const UserProfileSection = ({
         _id={profileInfo._id}
         isfollow={profileInfo.isfollow}
         accountname={params.accountname}
-        refetch={refetch}
       />
     </section>
   );

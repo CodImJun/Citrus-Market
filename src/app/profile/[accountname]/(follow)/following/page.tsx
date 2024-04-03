@@ -15,7 +15,6 @@ const FollowingListPage = ({ params }: FollowingListPage) => {
     isLoading,
     isError,
     isFetching,
-    refetch,
   } = useGetFollowList("following", params.accountname);
 
   if (isLoading) return null;
@@ -25,7 +24,7 @@ const FollowingListPage = ({ params }: FollowingListPage) => {
   return (
     <>
       {followingList?.map((userInfo) => (
-        <FollowItem key={userInfo._id} userInfo={userInfo} refetch={refetch} />
+        <FollowItem key={userInfo._id} userInfo={userInfo} />
       ))}
     </>
   );

@@ -3,17 +3,17 @@ import { useAuthStore } from "@/_states";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ProfileButtonSectionProps } from "./ProfileButtonSection.types";
-import { handleToggleFollow } from "../../_utils";
+import { useFollow } from "@/_hooks/useFollow";
 
 export const ProfileButtonSection = ({
   _id,
   isfollow,
   accountname,
-  refetch,
 }: ProfileButtonSectionProps) => {
   const router = useRouter();
   const loginID = useAuthStore((state) => state.loginInfo._id);
   const handleLogOut = useAuthStore((state) => state.handleLogOut);
+  const { mutate: handleFollow } = useFollow();
 
   return (
     <div className="flex gap-x-[1rem] mt-[2.4rem]">
@@ -49,9 +49,7 @@ export const ProfileButtonSection = ({
               size="M"
               w="w-[12rem]"
               active={false}
-              onClick={() =>
-                handleToggleFollow({ isfollow, accountname, refetch })
-              }
+              onClick={() => handleFollow({ isfollow, accountname })}
             >
               팔로우
             </Button>
@@ -60,9 +58,7 @@ export const ProfileButtonSection = ({
               size="M"
               w="w-[12rem]"
               active={true}
-              onClick={() =>
-                handleToggleFollow({ isfollow, accountname, refetch })
-              }
+              onClick={() => handleFollow({ isfollow, accountname })}
             >
               언팔로우
             </Button>

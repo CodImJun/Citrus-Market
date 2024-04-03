@@ -6,7 +6,6 @@ import { useGetFollowingPostList } from "./_states";
 import Link from "next/link";
 import { isNotEmptyArray } from "@/_utils";
 
-// TODO: Infinite Scroll
 const MainPage = () => {
   const {
     data: followingPostList,
