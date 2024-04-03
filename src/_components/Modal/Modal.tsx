@@ -13,7 +13,7 @@ export const Modal = () => {
           />
           <dialog
             open={modal.isOpen}
-            className="absolute bottom-0 flex flex-col w-full pb-[1rem] bg-white rounded-t-[1rem] z-30 text-black text-14-400-17.5"
+            className="absolute bottom-0 flex flex-col w-full pb-[1rem] bg-white rounded-t-[1rem] z-30 text-black text-14-400-17.5 border-[0.1rem] border-solid border-grey-300"
           >
             <button
               className="w-[5rem] h-[0.4rem] bg-grey-500 mx-auto my-[1.6rem] rounded-[0.5rem]"

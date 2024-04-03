@@ -7,7 +7,6 @@ import Link from "next/link";
 import { highlightMatch } from "./_utils";
 import { ImageWithFallback } from "@/_components";
 
-// TODO: Think about turning an event into a scrolling event
 const SearchPage = () => {
   const keyword = useKeywordStore((state) => state.keyword);
   const { data: userList = [], isSuccess } = useSearchUser(keyword);
@@ -29,7 +28,11 @@ const SearchPage = () => {
                   className="flex gap-x-[1.2rem] items-center w-[35.8rem] h-[5rem]"
                 >
                   <ImageWithFallback
-                    src={item.image}
+                    src={
+                      item.image.includes("http")
+                        ? item.image
+                        : `${process.env.NEXT_PUBLIC_API_URL}/${item.image}`
+                    }
                     alt="profile image"
                     width={50}
                     height={50}

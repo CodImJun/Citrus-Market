@@ -21,7 +21,7 @@ export const GlobalLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <div
       id="root"
-      className="relative box-content w-[39rem] max-w-[39rem] h-full m-auto border-x-[0.1rem] border-solid border-grey-300"
+      className="relative box-content w-[39rem] max-w-[39rem] h-full m-auto"
     >
       {children}
       <Modal />

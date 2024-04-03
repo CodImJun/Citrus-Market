@@ -32,7 +32,7 @@ const DefaultPost = (props: PostType) => {
       <div className="row-span-5">
         <div className="relative w-[4.2rem] h-[4.2rem]">
           <ImageWithFallback
-            src={props.author.image}
+            src={`${process.env.NEXT_PUBLIC_API_URL}/${props.author.image}`}
             fallbackSrc="/basic-profile-img.png"
             alt="profile image"
             fill
