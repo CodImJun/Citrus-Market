@@ -1,20 +1,27 @@
 "use client";
 
-import { Button, FormInput } from "@/_components";
+import { Button, FormInput, ImageUploadButton } from "@/_components";
 import Link from "next/link";
 import { useSignUp } from "../_hooks";
+import { ProfileImageInput } from "@/_components/ProfileImageInput";
+import { useUploadImage } from "@/_hooks";
+import Image from "next/image";
 
 const SignUpPage = () => {
   const {
+    setValue,
     handleSignUp,
     imageRegister,
     emailRegister,
     passwordRegister,
     usernameRegister,
     accountnameRegister,
-    introduceRegister,
+    introRegister,
     isValid,
   } = useSignUp();
+  const { images, handleChangeImage } = useUploadImage({
+    setValue,
+  });
 
   return (
     <>
@@ -22,8 +29,20 @@ const SignUpPage = () => {
         className="flex flex-col w-full gap-y-[1.4rem] mb-[2rem]"
         onSubmit={handleSignUp}
       >
-        {/* TODO: Add Image File Code - can't change image value */}
-        <FormInput type="image" labelName="image" {...imageRegister} />
+        <div className="relative w-[11rem] h-[11rem] m-auto mb-[1.4rem]">
+          <Image
+            src={images[0] ? images[0].imageUrl : `/basic-profile-img.png`}
+            alt="profile image"
+            fill
+            sizes="100%"
+            priority
+          />
+          <ImageUploadButton
+            position="right-0 bottom-0"
+            {...Object.assign(imageRegister, { onChange: handleChangeImage })}
+          />
+        </div>
+        {/* <ProfileImageInput register={imageRegister} setValue={setValue} /> */}
         <FormInput type="email" labelName="email" {...emailRegister} />
         <FormInput
           type="password"
@@ -37,11 +56,7 @@ const SignUpPage = () => {
           labelName="accountname"
           {...accountnameRegister}
         />
-        <FormInput
-          type="introduce"
-          labelName="introduce"
-          {...introduceRegister}
-        />
+        <FormInput type="introduce" labelName="introduce" {...introRegister} />
         <Button size="L" w="w-full" disabled={!isValid}>
           감귤마켓 시작하기
         </Button>

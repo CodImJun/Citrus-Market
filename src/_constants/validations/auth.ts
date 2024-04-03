@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { ERROR_MESSAGE } from "./message";
 import { ACCOUNTNAME_REGEX, PASSWORD_REGEX } from "./regex";
 
-const image = Yup.string();
+const image = Yup.mixed();
 
 const email = Yup.string()
   .email(ERROR_MESSAGE.email.pattern)

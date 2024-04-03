@@ -5,7 +5,8 @@ import Image from "next/image";
 
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   ({ labelName, error, ...props }, ref) => {
-    if (labelName === "image")
+    if (labelName === "image") {
+      console.log(props);
       return (
         <label
           htmlFor={labelName}
@@ -28,15 +29,14 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           />
           <input
             ref={ref}
-            id="labelName"
             type="file"
-            name="image"
             accept="image/jpg, image/gif, image/png, image/bmp, image/tif, image/heic"
             className="hidden"
             {...props}
           />
         </label>
       );
+    }
 
     return (
       <div className="flex flex-col gap-y-2 w-full">

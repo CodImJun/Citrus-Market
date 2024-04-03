@@ -9,6 +9,7 @@ export const ProfileInfoSection = ({
   username,
   accountname,
 }: ProfileInfoSectionProps) => {
+  console.log(image);
   return (
     <>
       <div className="flex gap-x-[3.8rem] items-center mb-[1.6rem]">
@@ -18,11 +19,11 @@ export const ProfileInfoSection = ({
           accountname={accountname}
         />
         <ImageWithFallback
-          src={image}
+          src={`${process.env.NEXT_PUBLIC_API_URL}/${image}`}
           alt="profile image"
           width={110}
           height={110}
-          className="rounded-full"
+          className="rounded-full w-[11rem] h-[11rem]"
           fallbackSrc="/basic-profile-img.png"
           priority
         />

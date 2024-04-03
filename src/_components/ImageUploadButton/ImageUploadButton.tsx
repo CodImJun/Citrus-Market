@@ -33,7 +33,6 @@ export const ImageUploadButton = forwardRef<
         type="file"
         id="upload-image"
         className="hidden"
-        multiple
         accept="image/jpg, image/gif, image/png, image/bmp, image/tif, image/heic"
         {...props}
       />

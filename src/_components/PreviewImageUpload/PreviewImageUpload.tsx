@@ -40,6 +40,7 @@ export const PreviewImageUpload = <T extends FieldValues>({
           ...register,
           onChange: handleChangeImage,
         })}
+        multiple
       />
     </div>
   );
