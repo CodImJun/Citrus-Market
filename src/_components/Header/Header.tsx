@@ -27,7 +27,7 @@ export const Header = (props: {
       return <MainHeader />;
     case pathname === "/search":
       return <SearchHeader />;
-    case pathname.startsWith("/upload"):
+    case pathname.startsWith("/upload") || pathname.includes("edit"):
       return (
         <UploadHeader
           buttonDisabled={props.isValid}

@@ -9,4 +9,5 @@ export * from "./Modal";
 export * from "./Navigation";
 export * from "./PostItem";
 export * from "./PreviewImageUpload";
+export * from "./ProfileImageInput";
 export * from "./SearchBar";

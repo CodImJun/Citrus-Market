@@ -1,5 +1,14 @@
 import { PaginationType, UserType } from "@/_types";
 
+// 3.1
+export type UpdateProfileRequest = {
+  image: string;
+  username: string;
+  accountname: string;
+  intro: string;
+};
+export type UpdateProfileResponse = { user: UserType };
+
 // 3.2
 export type GetPersonalProfileRequest = {
   accountname: string;

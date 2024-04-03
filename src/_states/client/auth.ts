@@ -19,6 +19,9 @@ type UseAuthStoreState = {
 type UseAuthStoreAction = {
   handleSetLoginInfo: (data: LoginResponse) => void;
   handleLogOut: () => void;
+  handleChangeInfo: (
+    info: Pick<UserType, "image" | "accountname" | "username" | "intro">
+  ) => void;
 };
 
 const initialState = {
@@ -59,6 +62,17 @@ export const useAuthStore = create<UseAuthStoreState & UseAuthStoreAction>()(
           localStorage.removeItem(ACCESS_TOKEN_KEY);
           localStorage.removeItem(REFRESH_TOKEN_KEY);
         }),
+      handleChangeInfo: (info) => {
+        set((state) => {
+          state.loginInfo = {
+            _id: state.loginInfo._id,
+            image: info.image,
+            accountname: info.accountname,
+            username: info.username,
+            intro: info.intro,
+          };
+        });
+      },
     })),
     {
       name: "CITRUS_AUTH_STORE",

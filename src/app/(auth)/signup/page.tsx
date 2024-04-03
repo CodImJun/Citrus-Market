@@ -1,11 +1,8 @@
 "use client";
 
-import { Button, FormInput, ImageUploadButton } from "@/_components";
+import { Button, FormInput, ProfileImageInput } from "@/_components";
 import Link from "next/link";
 import { useSignUp } from "../_hooks";
-import { ProfileImageInput } from "@/_components/ProfileImageInput";
-import { useUploadImage } from "@/_hooks";
-import Image from "next/image";
 
 const SignUpPage = () => {
   const {
@@ -19,9 +16,6 @@ const SignUpPage = () => {
     introRegister,
     isValid,
   } = useSignUp();
-  const { images, handleChangeImage } = useUploadImage({
-    setValue,
-  });
 
   return (
     <>
@@ -29,20 +23,7 @@ const SignUpPage = () => {
         className="flex flex-col w-full gap-y-[1.4rem] mb-[2rem]"
         onSubmit={handleSignUp}
       >
-        <div className="relative w-[11rem] h-[11rem] m-auto mb-[1.4rem]">
-          <Image
-            src={images[0] ? images[0].imageUrl : `/basic-profile-img.png`}
-            alt="profile image"
-            fill
-            sizes="100%"
-            priority
-          />
-          <ImageUploadButton
-            position="right-0 bottom-0"
-            {...Object.assign(imageRegister, { onChange: handleChangeImage })}
-          />
-        </div>
-        {/* <ProfileImageInput register={imageRegister} setValue={setValue} /> */}
+        <ProfileImageInput register={imageRegister} setValue={setValue} />
         <FormInput type="email" labelName="email" {...emailRegister} />
         <FormInput
           type="password"

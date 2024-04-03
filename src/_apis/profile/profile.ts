@@ -10,9 +10,28 @@ import {
   GetPersonalProfileResponse,
   UnFollowUserRequest,
   UnFollowUserResponse,
+  UpdateProfileRequest,
+  UpdateProfileResponse,
 } from "./profile.types";
 
 export const ProfileAPI = {
+  // 3.1
+  updateProfile: async ({
+    image,
+    username,
+    accountname,
+    intro,
+  }: UpdateProfileRequest) => {
+    const { data } = await instance.put<UpdateProfileResponse>("/user", {
+      user: {
+        username,
+        accountname,
+        intro,
+        image,
+      },
+    });
+    return data;
+  },
   // 3.2
   getPersonalProfile: async ({ accountname }: GetPersonalProfileRequest) => {
     const { data } = await instance.get<GetPersonalProfileResponse>(
