@@ -15,6 +15,7 @@ export const UserProfileSection = ({
         image={profileInfo.image}
         username={profileInfo.username}
         accountname={profileInfo.accountname}
+        intro={profileInfo.intro}
       />
       <ProfileButtonSection
         _id={profileInfo._id}
