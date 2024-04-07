@@ -1,40 +1,36 @@
-"use client";
+import { PrefetchHydration, queryKeys } from "@/_states";
 
-import {
-  UserPostSection,
-  UserProductSection,
-  UserProfileSection,
-} from "./_components";
-import { useProfileQueries } from "./_states";
 import { ProfilePageProps } from "./page.types";
+import { PostAPI, ProductAPI, ProfileAPI } from "@/_apis";
+import { UserProfile } from "./_components";
 
 const ProfilePage = ({ params }: ProfilePageProps) => {
-  const queryResults = useProfileQueries(params.accountname);
-  const [getProfileQuery, getProductQuery, getPostQuery] = queryResults;
+  const accountname = params.accountname;
 
-  const isLoading = queryResults.some((query) => query.isLoading);
-  const isError = queryResults.some((query) => query.isError);
-  const isFetching = queryResults.some((query) => query.isFetching);
-  const isData = !(
-    !getProfileQuery.data ||
-    !getProductQuery.data ||
-    !getPostQuery.data
+  const GET_MY_PROFILE_QUERY = {
+    queryKey: queryKeys.profile.getPersonalProfile({ accountname }),
+    queryFn: () => ProfileAPI.getPersonalProfile({ accountname }),
+  };
+  const GET_MY_PRODUCT_LIST_QUERY = {
+    queryKey: queryKeys.product.getProductList({ accountname }),
+    queryFn: () => ProductAPI.getProductList({ accountname }),
+  };
+  const GET_MY_POST_LIST_QUERY = {
+    queryKey: queryKeys.post.getMyPostList({ accountname }),
+    queryFn: () => PostAPI.getMyPostList({ accountname }),
+  };
+
+  return (
+    <PrefetchHydration
+      queries={[
+        GET_MY_PROFILE_QUERY,
+        GET_MY_PRODUCT_LIST_QUERY,
+        GET_MY_POST_LIST_QUERY,
+      ]}
+    >
+      <UserProfile accountname={params.accountname} />
+    </PrefetchHydration>
   );
-
-  if (isLoading) return null;
-  if (isError) return null;
-  if (isFetching) return null;
-  if (isData)
-    return (
-      <>
-        <UserProfileSection
-          profileInfo={getProfileQuery.data}
-          params={params}
-        />
-        <UserProductSection productList={getProductQuery.data} />
-        <UserPostSection postList={getPostQuery.data} />
-      </>
-    );
 };
 
 export default ProfilePage;

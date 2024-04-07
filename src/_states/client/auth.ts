@@ -25,7 +25,7 @@ type UseAuthStoreAction = {
 };
 
 const initialState = {
-  isLoggedIn: Boolean(localStorage.getItem(ACCESS_TOKEN_KEY)),
+  isLoggedIn: false,
   loginInfo: {
     _id: "",
     image: "",

@@ -4,7 +4,6 @@ import { UserProfileSectionProps } from "./UserProfileSection.types";
 
 export const UserProfileSection = ({
   profileInfo,
-  params,
 }: UserProfileSectionProps) => {
   return (
     <section className="flex flex-col items-center py-[2.8rem]">
@@ -19,7 +18,7 @@ export const UserProfileSection = ({
       <ProfileButtonSection
         _id={profileInfo._id}
         isfollow={profileInfo.isfollow}
-        accountname={params.accountname}
+        accountname={profileInfo.accountname}
       />
     </section>
   );

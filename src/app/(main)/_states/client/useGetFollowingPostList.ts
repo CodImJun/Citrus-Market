@@ -1,4 +1,5 @@
 import { PostAPI } from "@/_apis";
+import { ACCESS_TOKEN_KEY } from "@/_constants";
 import { queryKeys } from "@/_states";
 import { useQuery } from "@tanstack/react-query";
 
@@ -14,5 +15,7 @@ export const useGetFollowingPostList = () => {
   return useQuery({
     queryKey: queryKeys.post.getFollowingPostList(),
     queryFn: () => PostAPI.getFollowingPostList(),
+    enabled: !!localStorage.getItem(ACCESS_TOKEN_KEY),
+    refetchOnWindowFocus: true,
   });
 };
