@@ -6,10 +6,13 @@ import Link from "next/link";
 import { useAuthStore } from "@/_states";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "./Navigation.constants";
+import { usePrefetchEventHandler } from "@/_hooks";
 
 export const Navigation = () => {
   const accountname = useAuthStore((state) => state.loginInfo.accountname);
   const pathname = usePathname();
+  const handlePrefetchProfilePage =
+    usePrefetchEventHandler().handlePrefetchProfilePage;
 
   return (
     <nav
@@ -26,6 +29,9 @@ export const Navigation = () => {
                   ? "text-primary"
                   : "text-grey-700"
               }`}
+              onMouseOver={() =>
+                label === "프로필" && handlePrefetchProfilePage(accountname)
+              }
             >
               <Link
                 href={isProfile ? getPath!(accountname) : path!}

@@ -5,12 +5,14 @@ import { useGetFollowingPostList } from "../../_states";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, PostItem } from "@/_components";
+import { usePrefetchEventHandler } from "@/_hooks";
 
 export const FollowingPostList = () => {
   const { data: followingPostList } = useGetFollowingPostList();
+  const handlePrefetchPostDetail =
+    usePrefetchEventHandler().handlePrefetchPostDetail;
 
   if (!followingPostList) return null;
-
   return (
     <>
       {!isNotEmptyArray(followingPostList) ? (
@@ -18,7 +20,10 @@ export const FollowingPostList = () => {
       ) : (
         <ul className="flex flex-col gap-y-[3rem] py-[1.6rem] px-[2rem]">
           {followingPostList.map((post) => (
-            <li key={post.id}>
+            <li
+              key={post.id}
+              onMouseEnter={() => handlePrefetchPostDetail(post.id)}
+            >
               <Link href={`/post/${post.id}`}>
                 <PostItem type="list" {...post} />
               </Link>

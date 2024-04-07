@@ -4,9 +4,12 @@ import { UserPostSectionProps } from "./UserPostSection.types";
 import Image from "next/image";
 import Link from "next/link";
 import { PostItem } from "@/_components";
+import { usePrefetchEventHandler } from "@/_hooks";
 
 export const UserPostSection = ({ postList }: UserPostSectionProps) => {
   const { postType, setPostListType, setPostAlbumType } = usePostTypeStore();
+  const handlePrefetchPostDetail =
+    usePrefetchEventHandler().handlePrefetchPostDetail;
 
   const LIST_LAYOUT =
     postType === "list"
@@ -45,7 +48,10 @@ export const UserPostSection = ({ postList }: UserPostSectionProps) => {
             </div>
             <ul className={LIST_LAYOUT}>
               {postList.map((post) => (
-                <li key={post.id}>
+                <li
+                  key={post.id}
+                  onMouseOver={() => handlePrefetchPostDetail(post.id)}
+                >
                   <Link href={`/post/${post.id}`}>
                     <PostItem type={postType} {...post} />
                   </Link>
