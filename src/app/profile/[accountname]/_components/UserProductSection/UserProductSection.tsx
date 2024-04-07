@@ -1,5 +1,3 @@
-"use client";
-
 import { isNotEmptyArray } from "@/_utils";
 import Link from "next/link";
 import { ImageWithFallback } from "@/_components";
