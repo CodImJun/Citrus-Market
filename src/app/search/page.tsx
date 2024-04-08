@@ -1,4 +1,4 @@
-"use client";
+export const dynamic = "force-dynamic";
 
 import { useKeywordStore } from "@/_states";
 import { useSearchUser } from "./_states";

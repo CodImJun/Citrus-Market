@@ -1,5 +1,3 @@
-"use client";
-
 import { useRegisterFormField } from "@/app/(auth)/_hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";

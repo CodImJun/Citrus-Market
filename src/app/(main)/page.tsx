@@ -2,6 +2,8 @@ import { PrefetchHydration, queryKeys } from "@/_states";
 import { FollowingPostList } from "./_components";
 import { PostAPI } from "@/_apis";
 
+export const dynamic = "force-dynamic";
+
 const MainPage = () => {
   const GET_FOLLOWING_POST_LIST_QUERY = {
     queryKey: queryKeys.post.getFollowingPostList({ limit: 5, skip: 0 }),

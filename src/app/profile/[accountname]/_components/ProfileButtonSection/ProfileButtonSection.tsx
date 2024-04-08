@@ -23,7 +23,7 @@ export const ProfileButtonSection = ({
             size="M"
             w="w-[10rem]"
             active={true}
-            onClick={() => router.push("/upload/post")}
+            onClick={() => router.push("/upload/product")}
           >
             상품 등록
           </Button>

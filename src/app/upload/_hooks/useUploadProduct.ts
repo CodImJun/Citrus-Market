@@ -1,5 +1,3 @@
-"use client";
-
 import { useRegisterFormField } from "@/app/(auth)/_hooks";
 import { useForm } from "react-hook-form";
 import { useUploadProductMutate } from "../_states";
