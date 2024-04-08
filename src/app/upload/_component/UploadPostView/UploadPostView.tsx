@@ -21,7 +21,7 @@ export const UploadPostView = () => {
   return (
     <>
       <Header isValid={!isValid} uploadEvent={handleUploadPost} />
-      <main className="w-full h-full pt-[4.8rem] overflow-y-scroll overflow-x-hidden">
+      <main className="w-full h-full pt-[4.8rem] overflow-y-scroll overflow-x-hidden border-solid border-grey-300 border-[0.1rem]">
         <form className="relative py-[2rem] px-[1.6rem]">
           <PostContentTextarea register={contentRegister} />
           {images && (

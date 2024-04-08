@@ -30,7 +30,7 @@ const DefaultPost = (props: PostType) => {
   return (
     <article className="grid grid-cols-[4.2rem_1fr] gap-x-[1.2rem] gap-y-[1.6rem]">
       <div className="row-span-5">
-        <div className="relative w-[4.2rem] h-[4.2rem]">
+        <div className="relative w-[4.2rem] h-[4.2rem] rounded-full">
           <ImageWithFallback
             src={`${process.env.NEXT_PUBLIC_API_URL}/${props.author.image}`}
             fallbackSrc="/basic-profile-img.png"
@@ -38,6 +38,7 @@ const DefaultPost = (props: PostType) => {
             fill
             sizes="100%"
             priority
+            className="rounded-full"
           />
         </div>
       </div>
