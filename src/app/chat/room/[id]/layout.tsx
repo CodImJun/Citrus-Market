@@ -7,7 +7,7 @@ const ChatRoomPageLayout = ({ children }: React.PropsWithChildren) => {
     <>
       <Header />
       <MainLayout additionalStyle="bg-grey-100">{children}</MainLayout>
-      <ReplyBox profileImage="" />
+      <ReplyBox profileImage="" postId="" />
     </>
   );
 };
