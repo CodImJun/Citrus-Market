@@ -28,7 +28,7 @@ export const PostAPI = {
   // 5.2
   getFollowingPostList: async ({
     limit,
-    skip,
+    skip = 0,
   }: GetFollowingPostListRequest = {}) => {
     const { data } = await instance.get<GetFollowingPostListResponse>(
       `/post/feed`,
@@ -39,7 +39,7 @@ export const PostAPI = {
         },
       }
     );
-    return data.posts;
+    return { posts: data.posts, skip: skip + 5 };
   },
   // 5.3
   getMyPostList: async ({ accountname }: GetMyPostListRequest) => {

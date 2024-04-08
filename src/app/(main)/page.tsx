@@ -4,8 +4,8 @@ import { PostAPI } from "@/_apis";
 
 const MainPage = () => {
   const GET_FOLLOWING_POST_LIST_QUERY = {
-    queryKey: queryKeys.post.getFollowingPostList(),
-    queryFn: () => PostAPI.getFollowingPostList(),
+    queryKey: queryKeys.post.getFollowingPostList({ limit: 5, skip: 0 }),
+    queryFn: () => PostAPI.getFollowingPostList({ limit: 5, skip: 0 }),
   };
 
   return (
