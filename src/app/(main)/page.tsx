@@ -1,17 +1,25 @@
 import { PrefetchHydration, queryKeys } from "@/_states";
 import { FollowingPostList } from "./_components";
-import { PostAPI } from "@/_apis";
+import { GetFollowingPostListResponse, PostAPI } from "@/_apis";
 
 export const dynamic = "force-dynamic";
 
-const MainPage = () => {
-  const GET_FOLLOWING_POST_LIST_QUERY = {
-    queryKey: queryKeys.post.getFollowingPostList({ limit: 5, skip: 0 }),
-    queryFn: () => PostAPI.getFollowingPostList({ limit: 5, skip: 0 }),
-  };
-
+const MainPage = async () => {
   return (
-    <PrefetchHydration query={GET_FOLLOWING_POST_LIST_QUERY}>
+    <PrefetchHydration
+      infiniteQueries={{
+        queryKey: queryKeys.post.getFollowingPostList(),
+        queryFn: () => PostAPI.getFollowingPostList({ limit: 5, skip: 0 }),
+        initialPageParam: 0,
+        getNextPageParam: (lastPage) => {
+          const { skip } = lastPage as {
+            posts: GetFollowingPostListResponse["posts"];
+            skip: number;
+          };
+          return skip;
+        },
+      }}
+    >
       <FollowingPostList />
     </PrefetchHydration>
   );

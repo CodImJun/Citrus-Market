@@ -1,21 +1,21 @@
 import {
   HydrationBoundary,
   dehydrate,
-  QueryFunction,
-  QueryKey,
+  UseQueryOptions,
+  UseInfiniteQueryOptions,
 } from "@tanstack/react-query";
 import getQueryClient from "./getQueryClient";
 
-type FetchQueryOption = { queryKey: QueryKey; queryFn: QueryFunction };
-
 interface PrefetchHydrationProps extends React.PropsWithChildren {
-  query?: FetchQueryOption;
-  queries?: FetchQueryOption[];
+  query?: UseQueryOptions;
+  queries?: UseQueryOptions[];
+  infiniteQueries?: UseInfiniteQueryOptions;
 }
 
 export const PrefetchHydration = async ({
   query,
   queries,
+  infiniteQueries,
   children,
 }: PrefetchHydrationProps) => {
   const queryClient = getQueryClient();
@@ -36,6 +36,14 @@ export const PrefetchHydration = async ({
         })
       )
     );
+  }
+
+  if (infiniteQueries) {
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: infiniteQueries.queryKey,
+      queryFn: infiniteQueries.queryFn,
+      initialPageParam: 0,
+    });
   }
 
   const dehydratedState = dehydrate(queryClient);
