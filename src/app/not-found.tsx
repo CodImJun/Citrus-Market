@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+"use client";
 
 import { Button } from "@/_components";
 import Image from "next/image";
