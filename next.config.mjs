@@ -1,6 +1,20 @@
 /** @type {import('next').NextConfig} */
+import withBundleAnalyzer from "@next/bundle-analyzer";
+
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
 const nextConfig = {
-  images: { domains: ["api.mandarin.weniv.co.kr", "mandarin.api.weniv.co.kr"] },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.mandarin.weniv.co.kr",
+        port: "",
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+export default bundleAnalyzer(nextConfig);
