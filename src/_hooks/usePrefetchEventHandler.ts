@@ -1,9 +1,9 @@
 import { PostAPI, ProductAPI, ProfileAPI } from "@/_apis";
 import { queryKeys } from "@/_states";
-import getQueryClient from "@/_states/server/getQueryClient";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const usePrefetchEventHandler = () => {
-  const queryClient = getQueryClient();
+  const queryClient = useQueryClient();
 
   const handlePrefetchPostDetail = async (post_id: string) =>
     await queryClient.prefetchQuery({

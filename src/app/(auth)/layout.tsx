@@ -8,9 +8,9 @@ const AuthLayout = ({ children }: React.PropsWithChildren) => {
     pathname === "/login" ? "로그인" : pathname === "/signup" && "회원가입";
 
   return (
-    <div className="flex flex-col items-center h-full pt-[3.4rem] px-[3rem]">
+    <div className="flex flex-col items-center h-full pt-[3.4rem] px-[3rem] border-[0.1rem] border-solid border-grey-300">
       <header className="mb-[4rem]">
-        <h1 className="text-24-500-30">{TITLE}</h1>
+        <h1 className="text-black text-24-500-30">{TITLE}</h1>
       </header>
       <main className="flex flex-col w-full items-center">{children}</main>
     </div>
