@@ -1,3 +1,5 @@
+"use client";
+
 import { useModalStore } from "@/_states";
 
 export const Modal = () => {

@@ -7,16 +7,16 @@ import { isStatusInData } from "@/_utils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { removeCookie, setCookie } from "@/_utils/cookie";
 
-type UseAuthStoreState = {
-  isLoggedIn: boolean;
+type LoginStoreState = {
   loginInfo: Pick<
     UserType,
     "_id" | "image" | "accountname" | "username" | "intro"
   >;
 };
 
-type UseAuthStoreAction = {
+type LoginStoreAction = {
   handleSetLoginInfo: (data: LoginResponse) => void;
   handleLogOut: () => void;
   handleChangeInfo: (
@@ -25,7 +25,6 @@ type UseAuthStoreAction = {
 };
 
 const initialState = {
-  isLoggedIn: false,
   loginInfo: {
     _id: "",
     image: "",
@@ -35,14 +34,13 @@ const initialState = {
   },
 };
 
-export const useAuthStore = create<UseAuthStoreState & UseAuthStoreAction>()(
+export const useAuthStore = create<LoginStoreState & LoginStoreAction>()(
   persist(
     immer((set) => ({
       ...initialState,
       handleSetLoginInfo: (data) => {
         set((state) => {
           if (!isStatusInData(data)) {
-            state.isLoggedIn = true;
             state.loginInfo = {
               _id: data.user._id,
               image: data.user.image,
@@ -50,17 +48,16 @@ export const useAuthStore = create<UseAuthStoreState & UseAuthStoreAction>()(
               username: data.user.username,
               intro: data.user.intro,
             };
-            localStorage.setItem(ACCESS_TOKEN_KEY, data.user.token);
-            localStorage.setItem(REFRESH_TOKEN_KEY, data.user.refreshToken);
+            setCookie(ACCESS_TOKEN_KEY, data.user.token);
+            setCookie(REFRESH_TOKEN_KEY, data.user.refreshToken);
           }
         });
       },
       handleLogOut: () =>
         set((state) => {
-          state.isLoggedIn = false;
           state.loginInfo = initialState.loginInfo;
-          localStorage.removeItem(ACCESS_TOKEN_KEY);
-          localStorage.removeItem(REFRESH_TOKEN_KEY);
+          removeCookie(ACCESS_TOKEN_KEY);
+          removeCookie(REFRESH_TOKEN_KEY);
         }),
       handleChangeInfo: (info) => {
         set((state) => {
@@ -75,7 +72,7 @@ export const useAuthStore = create<UseAuthStoreState & UseAuthStoreAction>()(
       },
     })),
     {
-      name: "CITRUS_AUTH_STORE",
+      name: "LOGIN_STORE",
     }
   )
 );

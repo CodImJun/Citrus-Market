@@ -1,5 +1,5 @@
 import { LoginRequest, LoginResponse, UserAPI } from "@/_apis";
-import { useAuthStore } from "@/_states/client/auth";
+import { useAuthStore } from "@/_states/client/login";
 import { isStatusInData } from "@/_utils";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
