@@ -7,34 +7,23 @@ import {
 import getQueryClient from "./getQueryClient";
 
 interface PrefetchHydrationProps extends React.PropsWithChildren {
-  query?: UseQueryOptions;
   queries?: UseQueryOptions[];
   infiniteQueries?: UseInfiniteQueryOptions;
 }
 
 export const PrefetchHydration = async ({
-  query,
   queries,
   infiniteQueries,
   children,
 }: PrefetchHydrationProps) => {
   const queryClient = getQueryClient();
 
-  if (query) {
-    await queryClient.prefetchQuery({
-      queryKey: query.queryKey,
-      queryFn: query.queryFn,
-    });
-  }
-
   if (queries) {
-    await Promise.all(
-      queries.map((query) =>
-        queryClient.prefetchQuery({
-          queryKey: query.queryKey,
-          queryFn: query.queryFn,
-        })
-      )
+    await queries.map((query) =>
+      queryClient.prefetchQuery({
+        queryKey: query.queryKey,
+        queryFn: query.queryFn,
+      })
     );
   }
 
